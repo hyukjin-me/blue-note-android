@@ -1,9 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.BlueNote" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+    <!--
+        공식문서
+        테마 속성 정보
+        https://material.io/develop/android/theming/color
+        https://material.io/design/color/the-color-system.html#color-theme-creation
+        다크 테마 가이드
+        https://material.io/design/color/dark-theme.html#ui-application
+
+        코드랩
+        테마 색변경
+        https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-theme#2
+        다크 테마
+        https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-theme#4
+
+        블로그
+        https://blog.prototypr.io/how-to-design-a-dark-theme-for-your-android-app-3daeb264637
+    -->
+
+    <style name="Theme.BlueNote" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blue_bg</item>
+        <item name="colorPrimaryVariant">@color/blue_bg</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +30,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:background">@color/blue_bg</item>
     </style>
 </resources>
