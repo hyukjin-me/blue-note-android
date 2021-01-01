@@ -12,6 +12,10 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
-    <!-- fragment_note_create 에서 유저가 입력한 텍스트의 갯수를 보여줌-->
+    <!-- 노트생성 화면에서 유저가 입력한 텍스트의 갯수를 보여줌-->
     <string name="display_count">%s/100</string>
+    <!-- 노트 화면 리스트에서 보여줄 타이틀-->
+    <string name="display_title">%s</string>
+
+    <string name="desc_add">add</string>
 </resources>

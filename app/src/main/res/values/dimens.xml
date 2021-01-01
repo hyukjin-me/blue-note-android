@@ -2,6 +2,7 @@
 <resources>
     <dimen name="elevation_0">0dp</dimen>
     <dimen name="elevation_1">1dp</dimen>
+    <dimen name="radius">6dp</dimen>
     <!-- Margin -->
     <dimen name="normal">16dp</dimen>
     <dimen name="half">8dp</dimen>
@@ -10,4 +11,7 @@
     <!-- Text -->
     <dimen name="title">18sp</dimen>
     <dimen name="info">12sp</dimen>
+    <dimen name="view_max_height">88dp</dimen>
+    <dimen name="view_check_box">48sp</dimen>
+    <dimen name="view_check_box_translation_x">12dp</dimen>
 </resources>
