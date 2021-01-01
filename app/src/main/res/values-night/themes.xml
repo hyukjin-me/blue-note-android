@@ -13,4 +13,20 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.Drawer.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Drawer.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="backgroundBlue">
+        <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="bottomNavStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="elevation">@dimen/elevation_0</item>
+        <item name="itemTextColor">@color/gray</item>
+        <item name="itemIconTint">@color/gray</item>
+    </style>
 </resources>
