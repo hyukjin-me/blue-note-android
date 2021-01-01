@@ -60,4 +60,32 @@
         <item name="backgroundTint">@color/blue_btn</item>
         <item name="srcCompat">@drawable/ic_baseline_add_24</item>
     </style>
+
+    <style name="titleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/title</item>
+    </style>
+
+    <style name="infoTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/info</item>
+    </style>
+
+    <style name="inputEditStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textSize">@dimen/title</item>
+    </style>
+
+    <!-- EditText 밑줄, 입력 내용을 길게 눌렀을때 나타나는 범위조절 컨트롤러 색변경을 위해 설정함 -->
+    <style name="inputEditTheme">
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlNormal">@color/blue_control_normal</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textCursorDrawable">@color/white</item>
+    </style>
 </resources>

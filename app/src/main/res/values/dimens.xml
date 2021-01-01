@@ -7,4 +7,7 @@
     <dimen name="half">8dp</dimen>
     <dimen name="small">4dp</dimen>
     <dimen name="mini">2dp</dimen>
+    <!-- Text -->
+    <dimen name="title">18sp</dimen>
+    <dimen name="info">12sp</dimen>
 </resources>
