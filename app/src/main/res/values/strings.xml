@@ -7,7 +7,11 @@
     <string name="fragment_note_create">Create Note</string>
     <string name="fragment_sheet">Sheet</string>
     <string name="fragment_more">More</string>
+
     <string name="title">Title</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+
+    <!-- fragment_note_create 에서 유저가 입력한 텍스트의 갯수를 보여줌-->
+    <string name="display_count">%s/100</string>
 </resources>
