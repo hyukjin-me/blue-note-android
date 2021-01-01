@@ -9,4 +9,9 @@
         android:name="com.hurdle.bluenote.fragments.HomeFragment"
         android:label="@string/fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_note"
+        android:name="com.hurdle.bluenote.fragments.NoteFragment"
+        android:label="@string/fragment_note"
+        tools:layout="@layout/fragment_note" />
 </navigation>
