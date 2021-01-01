@@ -1,24 +1,29 @@
 package com.hurdle.bluenote.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hurdle.bluenote.R
+import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.databinding.FragmentNoteCreateBinding
 import com.hurdle.bluenote.viewmodels.NoteCreateViewModel
+import com.hurdle.bluenote.viewmodels.NoteViewModel
 
 class NoteCreateFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteCreateBinding
 
+    private lateinit var noteViewModel: NoteViewModel
     private lateinit var noteCreateViewModel: NoteCreateViewModel
 
     private lateinit var inputText: EditText
@@ -36,6 +41,7 @@ class NoteCreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         noteCreateViewModel = ViewModelProvider(this).get(NoteCreateViewModel::class.java)
 
         inputText = binding.noteCreateTitleEditText
@@ -57,7 +63,10 @@ class NoteCreateFragment : Fragment() {
         })
 
         binding.noteCreateSaveButton.setOnClickListener {
+            val note = Note(title = inputText.text.toString())
+            noteViewModel.insert(note)
             this.findNavController().popBackStack()
+            hideKeyboard(it)
         }
 
         binding.noteCreateCancelButton.setOnClickListener {
@@ -68,5 +77,11 @@ class NoteCreateFragment : Fragment() {
     // 유저가 입력한 텍스트의 갯수를 화면에 보여줌
     private fun setCountText(count: Int) {
         countText.text = String.format(getString(R.string.display_count), count)
+    }
+
+    private fun hideKeyboard(it: View) {
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(it.windowToken, 0)
     }
 }
