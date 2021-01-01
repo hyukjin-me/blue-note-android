@@ -48,4 +48,16 @@
         <item name="itemTextColor">@color/white</item>
         <item name="itemIconTint">@color/white</item>
     </style>
+
+    <style name="addFabStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/normal</item>
+        <item name="android:layout_marginBottom">@dimen/normal</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="tint">@color/white</item>
+        <item name="backgroundTint">@color/blue_btn</item>
+        <item name="srcCompat">@drawable/ic_baseline_add_24</item>
+    </style>
 </resources>

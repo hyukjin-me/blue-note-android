@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.hurdle.bluenote.databinding.FragmentHomeBinding
+import androidx.navigation.fragment.findNavController
 import com.hurdle.bluenote.databinding.FragmentNoteBinding
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 
@@ -29,5 +29,9 @@ class NoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+
+        binding.floatingActionButton.setOnClickListener {
+            this.findNavController().navigate(NoteFragmentDirections.actionNavNoteToNavNoteCreate())
+        }
     }
 }

@@ -2,4 +2,9 @@
 <resources>
     <dimen name="elevation_0">0dp</dimen>
     <dimen name="elevation_1">1dp</dimen>
+    <!-- Margin -->
+    <dimen name="normal">16dp</dimen>
+    <dimen name="half">8dp</dimen>
+    <dimen name="small">4dp</dimen>
+    <dimen name="mini">2dp</dimen>
 </resources>

@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#A0A0A0</color>
     <color name="blue_bg">#1E88E5</color>
+    <color name="blue_btn">#64b5F6</color>
     <color name="blue_text">#0d47a1</color>
 </resources>
