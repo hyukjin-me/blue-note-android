@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/nav_note">
+    app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/nav_home"
         android:name="com.hurdle.bluenote.fragments.HomeFragment"
@@ -13,7 +13,7 @@
         android:id="@+id/nav_note"
         android:name="com.hurdle.bluenote.fragments.NoteFragment"
         android:label="@string/fragment_note"
-        tools:layout="@layout/fragment_note" >
+        tools:layout="@layout/fragment_note">
         <action
             android:id="@+id/action_nav_note_to_nav_note_create"
             app:destination="@id/nav_note_create" />
@@ -22,15 +22,20 @@
         android:id="@+id/nav_more"
         android:name="com.hurdle.bluenote.fragments.MoreFragment"
         android:label="@string/fragment_more"
-        tools:layout="@layout/fragment_more"/>
+        tools:layout="@layout/fragment_more" />
     <fragment
         android:id="@+id/nav_sheet"
         android:name="com.hurdle.bluenote.fragments.SheetFragment"
         android:label="@string/fragment_sheet"
-        tools:layout="@layout/fragment_sheet"/>
+        tools:layout="@layout/fragment_sheet" />
     <fragment
         android:id="@+id/nav_note_create"
         android:name="com.hurdle.bluenote.fragments.NoteCreateFragment"
         android:label="@string/fragment_note_create"
-        tools:layout="@layout/fragment_note_create"/>
+        tools:layout="@layout/fragment_note_create">
+        <argument
+            android:name="id"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
 </navigation>

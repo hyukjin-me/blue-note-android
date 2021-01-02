@@ -13,6 +13,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.databinding.FragmentNoteCreateBinding
@@ -28,6 +30,19 @@ class NoteCreateFragment : Fragment() {
 
     private lateinit var inputText: EditText
     private lateinit var countText: TextView
+    private lateinit var note: Note
+
+    private var noteId = -1L
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        noteId = NoteCreateFragmentArgs.fromBundle(requireArguments()).id
+        if (noteId != -1L) {
+            val activity = activity as MainActivity
+            activity.setToolbarTitle(getString(R.string.edit_mode))
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,11 +59,27 @@ class NoteCreateFragment : Fragment() {
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         noteCreateViewModel = ViewModelProvider(this).get(NoteCreateViewModel::class.java)
 
+        val saveButton = binding.noteCreateSaveButton
         inputText = binding.noteCreateTitleEditText
         countText = binding.noteCreateCountTextView
 
         val count: Int = inputText.text.toString().count()
         setCountText(count)
+
+        // 편집모드
+        if (noteId != -1L) {
+            // Note 데이터 조회
+            noteViewModel.getNote(noteId)
+        }
+
+        noteViewModel.note.observe(viewLifecycleOwner) { note ->
+            if (note != null) {
+                this.note = note
+
+                inputText.setText(note.title)
+                binding.noteCreateSaveButton.text = getString(R.string.edit)
+            }
+        }
 
         inputText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -62,11 +93,27 @@ class NoteCreateFragment : Fragment() {
             }
         })
 
-        binding.noteCreateSaveButton.setOnClickListener {
-            val note = Note(title = inputText.text.toString())
-            noteViewModel.insert(note)
-            this.findNavController().popBackStack()
-            hideKeyboard(it)
+        saveButton.setOnClickListener {
+            val title = inputText.text.toString()
+
+            if (saveButton.text == getString(R.string.save)) {
+                // 생성모드
+                if (checkInput(title)) {
+                    noteViewModel.insert(Note(title = title))
+
+                    this.findNavController().popBackStack()
+                    hideKeyboard(it)
+                }
+            } else if (saveButton.text == getString(R.string.edit)) {
+                // 편집모드
+                if (checkInput(title)) {
+                    note.title = title
+                    noteViewModel.update(note)
+
+                    this.findNavController().popBackStack()
+                    hideKeyboard(it)
+                }
+            }
         }
 
         binding.noteCreateCancelButton.setOnClickListener {
@@ -83,5 +130,27 @@ class NoteCreateFragment : Fragment() {
         val imm =
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(it.windowToken, 0)
+    }
+
+    private fun checkInput(title: String): Boolean {
+        // 빈텍스트 허용안함
+        if (title.isEmpty()) {
+            hideKeyboard(requireView())
+            Snackbar.make(requireView(), "Error, empty text", Snackbar.LENGTH_LONG).show()
+            return false
+        }
+
+        // 글자 100자 초과 허용안함
+        if (title.length > 100) {
+            hideKeyboard(requireView())
+            Snackbar.make(
+                requireView(),
+                "Exceeding the maximum number of character",
+                Snackbar.LENGTH_LONG
+            ).show()
+            return false
+        }
+
+        return true
     }
 }

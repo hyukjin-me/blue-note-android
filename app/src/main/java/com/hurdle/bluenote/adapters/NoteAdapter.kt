@@ -22,7 +22,14 @@ class NoteAdapter(private val clickListener: OnNoteClickListener) :
             binding.noteListTitleTextView.text = String.format(titleFormat, item.title)
 
             binding.root.setOnClickListener {
-                clickListener.onClick(item)
+                clickListener.onClick(item, false)
+            }
+
+            binding.root.setOnLongClickListener {
+                clickListener.onClick(item, true)
+                // 롱클릭만 처리하기위해 true 설정
+                // false 설정시 클릭리스너도 같이 처리됨
+                true
             }
         }
     }
@@ -38,8 +45,8 @@ class NoteAdapter(private val clickListener: OnNoteClickListener) :
     }
 }
 
-class OnNoteClickListener(val clickListener: (note: Note) -> Unit) {
-    fun onClick(note: Note) = clickListener(note)
+class OnNoteClickListener(val clickListener: (note: Note, isLongClick: Boolean) -> Unit) {
+    fun onClick(note: Note, isLongClick: Boolean) = clickListener(note, isLongClick)
 }
 
 object NoteDiffUtil : DiffUtil.ItemCallback<Note>() {

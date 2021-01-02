@@ -28,6 +28,7 @@ class NoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNoteBinding.inflate(inflater)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -36,8 +37,13 @@ class NoteFragment : Fragment() {
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
-        noteAdapter = NoteAdapter(OnNoteClickListener {
-
+        noteAdapter = NoteAdapter(OnNoteClickListener { note, isLongClick ->
+            if (isLongClick) {
+                // 편집화면으로 이동
+                noteViewModel.navigateToEdit(note)
+            } else {
+                // 상세화면으로 이동
+            }
         })
 
         binding.noteList.apply {
@@ -58,6 +64,15 @@ class NoteFragment : Fragment() {
                     binding.noteList.scrollToPosition(0)
                 }
             }, 200)
+        }
+
+        noteViewModel.navigateToEdit.observe(viewLifecycleOwner) { note ->
+            if (note != null) {
+                val action = NoteFragmentDirections.actionNavNoteToNavNoteCreate(note.id)
+                this.findNavController().navigate(action)
+
+                noteViewModel.doneNavigateEdit()
+            }
         }
     }
 }

@@ -17,6 +17,9 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val _note = MutableLiveData<Note?>()
     val note = _note
 
+    private val _navigateToEdit = MutableLiveData<Note?>()
+    val navigateToEdit = _navigateToEdit
+
     init {
         val noteDao = NoteDatabase.getDatabase(application).noteDao
         repository = NoteRepository(noteDao)
@@ -38,5 +41,15 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     fun getNote(noteId: Long) = viewModelScope.launch(Dispatchers.IO) {
         val getNote = repository.getNote(noteId)
         _note.postValue(getNote)
+    }
+
+    // 편집모드로 이동
+    fun navigateToEdit(note: Note) {
+        _navigateToEdit.value = note
+    }
+
+    // 편집모드로 이동 완료
+    fun doneNavigateEdit() {
+        _navigateToEdit.value = null
     }
 }

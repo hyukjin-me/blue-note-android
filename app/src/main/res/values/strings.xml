@@ -11,6 +11,8 @@
     <string name="title">Title</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="edit">edit</string>
+    <string name="edit_mode">Edit Mode</string>
 
     <!-- 노트생성 화면에서 유저가 입력한 텍스트의 갯수를 보여줌-->
     <string name="display_count">%s/100</string>
