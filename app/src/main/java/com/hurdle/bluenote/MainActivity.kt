@@ -2,7 +2,9 @@ package com.hurdle.bluenote
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.forEach
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -62,6 +64,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_toolbar_menu, menu)
+
+        // 모든 아이템 숨김
+        menu.forEach { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_edit -> menuItem.isVisible = false
+                R.id.menu_delete -> menuItem.isVisible = false
+                else -> menuItem.isVisible = false
+            }
+        }
+        return true
     }
 
     // 프레그먼트에서 툴바 타이틀 변경을 위한 메서드

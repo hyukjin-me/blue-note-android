@@ -8,16 +8,20 @@
     <string name="fragment_sheet">Sheet</string>
     <string name="fragment_more">More</string>
 
-    <string name="title">Title</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="edit">edit</string>
-    <string name="edit_mode">Edit Mode</string>
-
     <!-- 노트생성 화면에서 유저가 입력한 텍스트의 갯수를 보여줌-->
     <string name="display_count">%s/100</string>
     <!-- 노트 화면 리스트에서 보여줄 타이틀-->
     <string name="display_title">%s</string>
 
     <string name="desc_add">add</string>
+
+    <string name="title">Title</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit">edit</string>
+    <string name="edit_mode">Edit Mode</string>
+    <string name="delete">Delete</string>
+    <string name="msg_edit_note">Long click on the note you want to edit</string>
+    <string name="msg_delete_note">Are you sure you want to delete the note?</string>
+    <string name="msg_delete_note_guide">Select a note to delete</string>
 </resources>

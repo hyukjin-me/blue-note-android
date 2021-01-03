@@ -1,7 +1,6 @@
 package com.hurdle.bluenote.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -22,11 +21,11 @@ class NoteAdapter(private val clickListener: OnNoteClickListener) :
             binding.noteListTitleTextView.text = String.format(titleFormat, item.title)
 
             binding.root.setOnClickListener {
-                clickListener.onClick(item, false)
+                clickListener.onClick(item, false, position = adapterPosition)
             }
 
             binding.root.setOnLongClickListener {
-                clickListener.onClick(item, true)
+                clickListener.onClick(item, true, position = adapterPosition)
                 // 롱클릭만 처리하기위해 true 설정
                 // false 설정시 클릭리스너도 같이 처리됨
                 true
@@ -43,10 +42,14 @@ class NoteAdapter(private val clickListener: OnNoteClickListener) :
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }
 
-class OnNoteClickListener(val clickListener: (note: Note, isLongClick: Boolean) -> Unit) {
-    fun onClick(note: Note, isLongClick: Boolean) = clickListener(note, isLongClick)
+class OnNoteClickListener(val clickListener: (note: Note, isLongClick: Boolean, position: Int) -> Unit) {
+    fun onClick(note: Note, isLongClick: Boolean, position:Int) = clickListener(note, isLongClick, position)
 }
 
 object NoteDiffUtil : DiffUtil.ItemCallback<Note>() {
