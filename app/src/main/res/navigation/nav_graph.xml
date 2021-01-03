@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_nav_note_to_nav_note_create"
             app:destination="@id/nav_note_create" />
+        <action
+            android:id="@+id/action_nav_note_to_nav_note_page"
+            app:destination="@id/nav_note_page" />
     </fragment>
     <fragment
         android:id="@+id/nav_more"
@@ -37,5 +40,17 @@
             android:name="id"
             android:defaultValue="-1L"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_note_page"
+        android:name="com.hurdle.bluenote.fragments.NotePageFragment"
+        android:label="@string/fragment_note_page"
+        tools:layout="@layout/fragment_note_page">
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <argument
+            android:name="title"
+            app:argType="string" />
     </fragment>
 </navigation>

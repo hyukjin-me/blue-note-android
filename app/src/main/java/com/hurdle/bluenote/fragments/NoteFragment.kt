@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
@@ -50,6 +49,7 @@ class NoteFragment : Fragment() {
                     noteViewModel.navigateToEdit(note)
                 } else {
                     // 상세화면으로 이동
+                    noteViewModel.navigateToPage(note)
                 }
             } else {
                 // 삭제버튼이 선택된 경우
@@ -96,12 +96,24 @@ class NoteFragment : Fragment() {
             }, 200)
         }
 
+        // 편집화면으로 이동
         noteViewModel.navigateToEdit.observe(viewLifecycleOwner) { note ->
             if (note != null) {
                 val action = NoteFragmentDirections.actionNavNoteToNavNoteCreate(note.id)
                 this.findNavController().navigate(action)
 
                 noteViewModel.doneNavigateEdit()
+            }
+        }
+
+        // 상제화면(페이지)화면으로 이동
+        noteViewModel.navigateToPage.observe(viewLifecycleOwner) { note ->
+            if (note != null) {
+                val action =
+                    NoteFragmentDirections.actionNavNoteToNavNotePage(note.id, note.title)
+                this.findNavController().navigate(action)
+
+                noteViewModel.doneNavigatePage()
             }
         }
     }
@@ -150,7 +162,6 @@ class NoteFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("노트", "onResume: $isDeleteButton")
         isDeleteButton = false
     }
 }

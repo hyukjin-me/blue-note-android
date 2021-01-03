@@ -3,6 +3,7 @@ package com.hurdle.bluenote
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.forEach
 import androidx.navigation.NavController
@@ -44,12 +45,16 @@ class MainActivity : AppCompatActivity() {
                     toolbar.setNavigationOnClickListener {
                         // drawLayout 이벤트
                     }
+                    // 하단뷰 보임
+                    bottomNavView.visibility = View.VISIBLE
                 }
                 R.id.nav_note -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_note_24)
                     // drawLayout 열림, 또는 뒤로가기 이벤트 방지
                     toolbar.setNavigationOnClickListener {
                     }
+                    // 하단뷰 보임
+                    bottomNavView.visibility = View.VISIBLE
                 }
                 R.id.nav_note_create -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
@@ -57,6 +62,17 @@ class MainActivity : AppCompatActivity() {
                     toolbar.setNavigationOnClickListener {
                         controller.popBackStack()
                     }
+                    // 하단뷰 보임
+                    bottomNavView.visibility = View.VISIBLE
+                }
+                R.id.nav_note_page -> {
+                    toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+                    // 뒤로가기
+                    toolbar.setNavigationOnClickListener {
+                        controller.popBackStack()
+                    }
+                    // 하단뷰 숨김
+                    bottomNavView.visibility = View.GONE
                 }
             }
         }
