@@ -27,15 +27,15 @@ class NotePageAdapter(private val notePageClickListener: OnNotePageClickListener
             val displayDayText = displayDayFormat.format(date)
 
             if (checkDay != displayDayText) {
-                binding.wordListDayTextView.visibility = View.VISIBLE
-                binding.wordListDayTextView.text = displayDayText
+                binding.pageListDayTextView.visibility = View.VISIBLE
+                binding.pageListDayTextView.text = displayDayText
                 checkDay = displayDayText
             } else {
-                binding.wordListDayTextView.visibility = View.GONE
+                binding.pageListDayTextView.visibility = View.GONE
             }
 
             // 화면에 시간표시
-            val hourMinuteTextView = binding.wordListClockTextView
+            val hourMinuteTextView = binding.pageListClockTextView
             val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
             hourMinuteTextView.text = timeFormat.format(date)
 
@@ -47,11 +47,11 @@ class NotePageAdapter(private val notePageClickListener: OnNotePageClickListener
 
             // 라인 및 글자수 제한
             if (size >= 6 || count > 200) {
-                binding.wordListExpansionTextView.visibility = View.VISIBLE
+                binding.pageListExpansionTextView.visibility = View.VISIBLE
             }
 
             // 내용
-            binding.wordListContentsTextView.text = wordContentText
+            binding.pageListContentsTextView.text = wordContentText
 
             // 클릭 이벤트
             binding.root.setOnClickListener {

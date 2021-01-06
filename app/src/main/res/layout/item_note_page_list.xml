@@ -7,7 +7,7 @@
     tools:background="@color/blue_bg">
 
     <TextView
-        android:id="@+id/word_list_day_text_view"
+        android:id="@+id/page_list_day_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/blue_btn"
@@ -21,7 +21,7 @@
         tools:visibility="visible" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/word_list_user_image"
+        android:id="@+id/page_list_user_image"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="@dimen/half"
@@ -30,20 +30,20 @@
         app:civ_border_color="@color/white"
         app:civ_border_width="@dimen/mini"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/word_list_container" />
+        app:layout_constraintTop_toTopOf="@+id/page_list_container" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/word_list_container"
+        android:id="@+id/page_list_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/half"
         android:layout_marginTop="@dimen/half"
-        app:layout_constraintEnd_toStartOf="@+id/word_list_guideline2"
-        app:layout_constraintStart_toEndOf="@+id/word_list_user_image"
-        app:layout_constraintTop_toBottomOf="@+id/word_list_day_text_view">
+        app:layout_constraintEnd_toStartOf="@+id/page_list_guideline2"
+        app:layout_constraintStart_toEndOf="@+id/page_list_user_image"
+        app:layout_constraintTop_toBottomOf="@+id/page_list_day_text_view">
 
         <TextView
-            android:id="@+id/word_list_contents_text_view"
+            android:id="@+id/page_list_contents_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_word_content"
@@ -63,32 +63,32 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/word_list_clock_text_view"
+        android:id="@+id/page_list_clock_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/info"
-        app:layout_constraintStart_toStartOf="@+id/word_list_container"
-        app:layout_constraintTop_toBottomOf="@+id/word_list_container"
+        app:layout_constraintStart_toStartOf="@+id/page_list_container"
+        app:layout_constraintTop_toBottomOf="@+id/page_list_container"
         tools:text="11:30" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/word_list_guideline2"
+        android:id="@+id/page_list_guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".8" />
 
     <TextView
-        android:id="@+id/word_list_expansion_text_view"
+        android:id="@+id/page_list_expansion_text_view"
         android:layout_width="19dp"
         android:layout_height="25dp"
         android:layout_marginStart="@dimen/half"
         android:text="@string/open"
         android:textColor="@color/white"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/word_list_container"
-        app:layout_constraintStart_toEndOf="@+id/word_list_container"
-        app:layout_constraintTop_toTopOf="@+id/word_list_container"
+        app:layout_constraintBottom_toBottomOf="@+id/page_list_container"
+        app:layout_constraintStart_toEndOf="@+id/page_list_container"
+        app:layout_constraintTop_toTopOf="@+id/page_list_container"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

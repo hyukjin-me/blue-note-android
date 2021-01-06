@@ -73,7 +73,7 @@ class NotePageFragment : Fragment() {
 
         })
 
-        binding.noteWordList.apply {
+        binding.notePageList.apply {
             adapter = notePageAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
@@ -85,20 +85,20 @@ class NotePageFragment : Fragment() {
             Handler(Looper.getMainLooper()).postDelayed(object : Runnable {
                 override fun run() {
                     // 리사이클러뷰 하단으로 이동
-                    binding.noteWordList.scrollToPosition(notePageAdapter.itemCount - 1)
+                    binding.notePageList.scrollToPosition(notePageAdapter.itemCount - 1)
                 }
             }, 200)
         }
 
         // 클릭이벤트 발생시 시간/날씨 뷰 숨김
-        binding.noteWordCloseImageView.setOnClickListener {
-            val weatherConstraintLayout = binding.noteWordWeatherContainer
+        binding.notePageCloseImageView.setOnClickListener {
+            val weatherConstraintLayout = binding.notePageWeatherContainer
             weatherConstraintLayout.visibility = View.GONE
         }
 
         // 데이터 저장
-        binding.noteWordSendImageView.setOnClickListener {
-            val inputTextView = binding.noteWordInputEditText
+        binding.notePageSendImageView.setOnClickListener {
+            val inputTextView = binding.notePageInputEditText
             val inputText = inputTextView.text.toString()
             if (noteId != -1L && inputText.isNotEmpty()) {
                 notePageViewModel.insert(NotePage(noteId = noteId, content = inputText))
@@ -110,7 +110,7 @@ class NotePageFragment : Fragment() {
 
     private fun displayOfWeather() {
         // 날씨 텍스트 데이터 가져올때까지 숨김
-        val weatherTextView = binding.noteWordWeatherTextView
+        val weatherTextView = binding.notePageWeatherTextView
 
         weatherViewModel.currentWeather.observe(viewLifecycleOwner) { weather ->
 
@@ -153,7 +153,7 @@ class NotePageFragment : Fragment() {
                 val fullTimeFormat =
                     SimpleDateFormat("yyyy-MM-dd (E) aa HH:mm:ss", Locale.getDefault())
                 val displayOfDate = fullTimeFormat.format(calendar.time)
-                binding.noteWordTimeTextView.text = displayOfDate
+                binding.notePageTimeTextView.text = displayOfDate
 
                 timeHandler.postDelayed(this, 1000)
             }
