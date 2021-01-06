@@ -5,6 +5,11 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+// https://guides.codepath.com/android/Storing-Secret-Keys-in-Android
+def apikeyPropertiesFile = rootProject.file("secret.apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
