@@ -10,7 +10,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-
 private val BASE_URL = "https://api.openweathermap.org/"
 
 private val moshi = Moshi.Builder()

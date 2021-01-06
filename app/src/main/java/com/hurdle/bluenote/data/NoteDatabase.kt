@@ -6,13 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Note::class, WeatherCache::class],
+    entities = [Note::class, NotePage::class, WeatherCache::class],
     version = 1,
     exportSchema = false
 )
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract val noteDao: NoteDao
+    abstract val notePageDao: NotePageDao
     abstract val weatherDao: WeatherDao
 
     companion object {
