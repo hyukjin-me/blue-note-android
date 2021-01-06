@@ -5,6 +5,8 @@ buildscript {
         nav_version = "2.3.2"
         room_version = "2.2.6"
         circle_imageview_version= "3.0.0"
+        retrofit_version = "2.9.0"
+        moshi_version = "1.11.0"
     }
     repositories {
         google()
