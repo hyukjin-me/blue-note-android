@@ -41,6 +41,12 @@ class NotePageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         displayOfTime()
+
+        // 클릭이벤트 발생시 시간/날씨 뷰 숨김
+        binding.noteWordCloseImageView.setOnClickListener {
+            val weatherConstraintLayout = binding.noteWordWeatherContainer
+            weatherConstraintLayout.visibility = View.GONE
+        }
     }
 
     private fun displayOfTime() {
@@ -49,7 +55,8 @@ class NotePageFragment : Fragment() {
         timeHandler.post(object : Runnable {
             override fun run() {
                 val calendar = Calendar.getInstance()
-                val fullTimeFormat = SimpleDateFormat("yyyy-MM-dd (E) aa HH:mm:ss", Locale.getDefault())
+                val fullTimeFormat =
+                    SimpleDateFormat("yyyy-MM-dd (E) aa HH:mm:ss", Locale.getDefault())
                 val displayOfDate = fullTimeFormat.format(calendar.time)
                 binding.noteWordTimeTextView.text = displayOfDate
 
