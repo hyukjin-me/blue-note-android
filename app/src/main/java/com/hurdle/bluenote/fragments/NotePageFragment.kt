@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.databinding.FragmentNotePageBinding
@@ -55,5 +56,16 @@ class NotePageFragment : Fragment() {
                 timeHandler.postDelayed(this, 1000)
             }
         })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard(binding.root)
+    }
+
+    private fun hideKeyboard(it: View) {
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(it.windowToken, 0)
     }
 }
