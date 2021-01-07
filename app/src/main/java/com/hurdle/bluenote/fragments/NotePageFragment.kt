@@ -205,6 +205,13 @@ class NotePageFragment : Fragment() {
         when (item.itemId) {
             R.id.menu_edit -> {
                 isEdit = !isEdit
+
+                if (isEdit) {
+                    item.setIcon(R.drawable.ic_baseline_edit_24_red)
+                } else {
+                    item.setIcon(R.drawable.ic_baseline_edit_24)
+                }
+
                 notePageViewModel.changeEditState(isEdit)
             }
         }
