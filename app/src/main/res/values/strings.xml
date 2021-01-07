@@ -6,6 +6,7 @@
     <string name="fragment_note">Note</string>
     <string name="fragment_note_create">Create Note</string>
     <string name="fragment_note_page">Note Page</string>
+    <string name="fragment_note_open">Note Open</string>
     <string name="fragment_sheet">Sheet</string>
     <string name="fragment_more">More</string>
 
@@ -21,7 +22,7 @@
     <string name="title">Title</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="edit">edit</string>
+    <string name="edit">Edit</string>
     <string name="edit_mode">Edit Mode</string>
     <string name="delete">Delete</string>
     <string name="msg_edit_note">Long click on the note you want to edit</string>
@@ -29,4 +30,5 @@
     <string name="msg_delete_note_guide">Select a note to delete</string>
     <string name="open">Open</string>
     <string name="message">Message</string>
+    <string name="close">Close</string>
 </resources>

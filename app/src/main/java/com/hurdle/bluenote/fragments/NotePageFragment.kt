@@ -4,12 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
@@ -37,6 +38,8 @@ class NotePageFragment : Fragment() {
 
     val timeHandler = Handler(Looper.getMainLooper())
 
+    var isEdit = false
+
     private var noteId: Long = -1L
 
     override fun onAttach(context: Context) {
@@ -54,6 +57,7 @@ class NotePageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNotePageBinding.inflate(inflater)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -61,16 +65,18 @@ class NotePageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val application = requireActivity().application
-        val wordFactory = NotePageViewModelFactory(application = application, noteId)
-        notePageViewModel = ViewModelProvider(this, wordFactory).get(NotePageViewModel::class.java)
+        val pageFactory = NotePageViewModelFactory(application = application, noteId)
+        notePageViewModel = ViewModelProvider(this, pageFactory).get(NotePageViewModel::class.java)
 
         weatherViewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
 
         displayOfWeather()
         displayOfTime()
 
-        notePageAdapter = NotePageAdapter(OnNotePageClickListener {
-
+        notePageAdapter = NotePageAdapter(OnNotePageClickListener { notePage, message ->
+            if (message == "open") {
+                notePageViewModel.navigateNoteOpen(notePage)
+            }
         })
 
         binding.notePageList.apply {
@@ -104,6 +110,24 @@ class NotePageFragment : Fragment() {
                 notePageViewModel.insert(NotePage(noteId = noteId, content = inputText))
 
                 inputTextView.setText("")
+            }
+        }
+
+        notePageViewModel.isEditState.observe(viewLifecycleOwner) { isEditVisible ->
+            if (isEditVisible != null) {
+                notePageAdapter.setEditMode(isEditVisible)
+            }
+        }
+
+        notePageViewModel.navigateNoteOpen.observe(viewLifecycleOwner) { notePage ->
+            if (notePage != null) {
+                val action = NotePageFragmentDirections.actionNavNotePageToNavNoteOpen(
+                    notePage.id,
+                    notePage.noteId
+                )
+
+                this.findNavController().navigate(action)
+                notePageViewModel.doneNavigateNotePage()
             }
         }
     }
@@ -165,6 +189,26 @@ class NotePageFragment : Fragment() {
         hideKeyboard(binding.root)
         // 다른 화면 이동후 노트페이지 화면으로 재진입시 기존 displayDay 변수에 저장된 날짜의 시간 뷰가 모두 GONE 처리되어 "" 처리함
         checkDay = ""
+        isEdit = false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.forEach {
+            when (it.itemId) {
+                R.id.menu_edit -> it.isVisible = true
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_edit -> {
+                isEdit = !isEdit
+                notePageViewModel.changeEditState(isEdit)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun hideKeyboard(it: View) {
