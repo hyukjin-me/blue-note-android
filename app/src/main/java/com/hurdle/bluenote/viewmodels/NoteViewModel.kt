@@ -38,7 +38,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun delete(note: Note) = viewModelScope.launch(Dispatchers.IO) {
-        repository.delete(note)
+        repository.deleteNote(note)
     }
 
     fun getNote(noteId: Long) = viewModelScope.launch(Dispatchers.IO) {
@@ -62,5 +62,9 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     fun doneNavigatePage() {
         _navigateToPage.value = null
+    }
+
+    fun deleteNotePages(id: Long) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteNotePage(id)
     }
 }

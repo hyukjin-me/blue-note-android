@@ -1,15 +1,15 @@
 package com.hurdle.bluenote.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface NotePageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(notePage: NotePage)
+
+    @Query("DELETE FROM note_page_table WHERE note_id = :noteId AND id = :pageItemId")
+    fun deleteNotePageItem(pageItemId: Long, noteId: Long)
 
     @Query("SELECT * FROM note_page_table WHERE note_id = :noteId ORDER BY id ASC")
     fun getAll(noteId: Long): LiveData<List<NotePage>>

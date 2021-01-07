@@ -26,7 +26,7 @@
     <string name="edit_mode">Edit Mode</string>
     <string name="delete">Delete</string>
     <string name="msg_edit_note">Long click on the note you want to edit</string>
-    <string name="msg_delete_note">Are you sure you want to delete the note?</string>
+    <string name="msg_delete_note">Are you sure you want to delete?</string>
     <string name="msg_delete_note_guide">Select a note to delete</string>
     <string name="open">Open</string>
     <string name="message">Message</string>

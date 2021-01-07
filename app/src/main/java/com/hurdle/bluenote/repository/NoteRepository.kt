@@ -19,8 +19,13 @@ class NoteRepository(private val noteDao: NoteDao) {
     }
 
     @WorkerThread
-    fun delete(note: Note) {
+    fun deleteNote(note: Note) {
         noteDao.delete(note)
+    }
+
+    @WorkerThread
+    fun deleteNotePage(id: Long){
+        noteDao.deleteNotePages(id)
     }
 
     @WorkerThread

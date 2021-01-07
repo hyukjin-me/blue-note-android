@@ -15,12 +15,13 @@ import com.hurdle.bluenote.R
 import com.hurdle.bluenote.adapters.NoteAdapter
 import com.hurdle.bluenote.adapters.OnNoteClickListener
 import com.hurdle.bluenote.databinding.FragmentNoteBinding
+import com.hurdle.bluenote.viewmodels.NotePageViewModel
+import com.hurdle.bluenote.viewmodels.NotePageViewModelFactory
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 
 class NoteFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteBinding
-
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var noteAdapter: NoteAdapter
 
@@ -59,6 +60,7 @@ class NoteFragment : Fragment() {
                         .setPositiveButton(R.string.delete) { _, _ ->
                             // 선택된 노트 db에서 삭제
                             noteViewModel.delete(note)
+                            noteViewModel.deleteNotePages(note.id)
                         }
                         .setNegativeButton(R.string.cancel) { _, _ ->
                         }

@@ -1,5 +1,6 @@
 package com.hurdle.bluenote.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.*
@@ -19,6 +20,9 @@ class NoteOpenFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteOpenBinding
     private lateinit var notePageViewModel: NotePageViewModel
+
+    private var id: Long = -1L
+    private var noteId: Long = -1L
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -40,8 +44,9 @@ class NoteOpenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val getData = NoteOpenFragmentArgs.fromBundle(requireArguments())
-        val id = getData.id
-        val noteId = getData.noteId
+
+        id = getData.id
+        noteId = getData.noteId
 
         val application = requireActivity().application
         val pageFactory = NotePageViewModelFactory(application = application, noteId)
@@ -65,5 +70,36 @@ class NoteOpenFragment : Fragment() {
         binding.noteOpenCloseButton.setOnClickListener {
             this.findNavController().popBackStack()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.forEach {
+            when (it.itemId) {
+                R.id.menu_delete -> it.isVisible = true
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_delete -> {
+                deleteDialog()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteDialog() {
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage(R.string.msg_delete_note)
+            .setPositiveButton(R.string.delete) { _, _ ->
+                notePageViewModel.deleteNotePageItem(id, noteId)
+                this.findNavController().popBackStack()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+            }
+            .create()
+        builder.show()
     }
 }

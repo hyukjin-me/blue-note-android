@@ -41,6 +41,10 @@ class NotePageViewModel(application: Application, noteId: Long) : AndroidViewMod
         _pageItem.postValue(notePageItem)
     }
 
+    fun deleteNotePageItem(id: Long, noteId: Long) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteNotePageItem(id, noteId)
+    }
+
     fun changeEditState(edit: Boolean) {
         _isEditState.value = edit
     }
