@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
+import com.hurdle.bluenote.data.NotePage
 import com.hurdle.bluenote.databinding.FragmentNoteOpenBinding
 import com.hurdle.bluenote.viewmodels.NotePageViewModel
 import com.hurdle.bluenote.viewmodels.NotePageViewModelFactory
@@ -23,6 +24,10 @@ class NoteOpenFragment : Fragment() {
 
     private var id: Long = -1L
     private var noteId: Long = -1L
+
+    private var isEdit = false
+
+    private lateinit var notePage: NotePage
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -53,17 +58,16 @@ class NoteOpenFragment : Fragment() {
         notePageViewModel = ViewModelProvider(this, pageFactory).get(NotePageViewModel::class.java)
 
         notePageViewModel.getNotePageItem(id)
-
         notePageViewModel.pageItem.observe(viewLifecycleOwner) { notePageItem ->
             if (notePageItem != null) {
-
+                notePage = notePageItem
                 // 툴바 타이틀 변경
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd (E)", Locale.getDefault())
                 val displayOfTimeText = dateFormat.format(notePageItem.time).toString()
                 val activity = activity as MainActivity
                 activity.setToolbarTitle(displayOfTimeText)
 
-                binding.noteOpenTitleTextView.text = notePageItem.content
+                binding.noteOpenTitleTextView.setText(notePageItem.content)
             }
         }
 
@@ -76,6 +80,7 @@ class NoteOpenFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         menu.forEach {
             when (it.itemId) {
+                R.id.menu_edit -> it.isVisible = true
                 R.id.menu_delete -> it.isVisible = true
             }
         }
@@ -86,8 +91,40 @@ class NoteOpenFragment : Fragment() {
             R.id.menu_delete -> {
                 deleteDialog()
             }
+            R.id.menu_edit -> {
+                isEdit = !isEdit
+                if (isEdit) {
+                    item.setIcon(R.drawable.ic_baseline_save_24)
+                    binding.noteOpenLinearLayout.setBackgroundResource(R.drawable.bg_square)
+                    binding.noteOpenTitleTextView.isEnabled = true
+                } else {
+                    saveDialog(item)
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun saveDialog(item: MenuItem) {
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage(R.string.msg_save_note)
+            .setPositiveButton(R.string.save) { _, _ ->
+                // Edit 아이콘 변경
+                item.setIcon(R.drawable.ic_baseline_edit_24)
+                // 테투리 배경 제거
+                binding.noteOpenLinearLayout.setBackgroundResource(0)
+                binding.noteOpenTitleTextView.isEnabled = false
+
+                val inputText = binding.noteOpenTitleTextView.text.toString()
+                notePage.content = inputText
+
+                notePageViewModel.update(notePage)
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                isEdit = true
+            }
+            .create()
+        builder.show()
     }
 
     private fun deleteDialog() {

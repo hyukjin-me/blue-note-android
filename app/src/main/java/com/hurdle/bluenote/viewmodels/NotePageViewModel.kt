@@ -36,6 +36,12 @@ class NotePageViewModel(application: Application, noteId: Long) : AndroidViewMod
         repository.insert(notePage)
     }
 
+    fun update(notePage: NotePage?) = viewModelScope.launch(Dispatchers.IO) {
+        if (notePage != null) {
+            repository.update(notePage)
+        }
+    }
+
     fun getNotePageItem(id: Long) = viewModelScope.launch(Dispatchers.IO) {
         val notePageItem = repository.getNotePageItem(id)
         _pageItem.postValue(notePageItem)

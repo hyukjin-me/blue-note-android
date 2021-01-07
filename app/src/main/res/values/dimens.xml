@@ -12,6 +12,7 @@
     <dimen name="title">18sp</dimen>
     <dimen name="info">12sp</dimen>
     <dimen name="view_max_height">88dp</dimen>
+    <dimen name="button_max_height">48dp</dimen>
     <dimen name="view_check_box">48sp</dimen>
     <dimen name="view_check_box_translation_x">12dp</dimen>
 </resources>

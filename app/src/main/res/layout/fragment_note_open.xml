@@ -8,9 +8,11 @@
 
     <Button
         android:id="@+id/note_open_close_button"
-        android:layout_width="match_parent"
+        style="@style/titleTextStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/blue_btn"
+        android:minHeight="@dimen/button_max_height"
         android:text="@string/close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,9 +20,11 @@
 
     <ScrollView
         android:id="@+id/note_open_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/note_open_close_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,14 +33,19 @@
             android:id="@+id/note_open_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/normal">
+            android:layout_margin="@dimen/normal"
+            tools:background="@drawable/bg_square"
+            android:orientation="vertical">
 
-            <TextView
+            <EditText
                 android:id="@+id/note_open_title_text_view"
-                style="@style/titleTextStyle"
+                style="@style/inputEditStyle"
+                android:padding="@dimen/small"
+                android:background="@null"
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/scrollEditTheme"
                 tools:text="TextView" />
         </LinearLayout>
     </ScrollView>

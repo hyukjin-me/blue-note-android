@@ -8,6 +8,9 @@ interface NotePageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(notePage: NotePage)
 
+    @Update
+    fun update(notePage: NotePage)
+
     @Query("DELETE FROM note_page_table WHERE note_id = :noteId AND id = :pageItemId")
     fun deleteNotePageItem(pageItemId: Long, noteId: Long)
 

@@ -16,4 +16,8 @@ class NotePageRepository(private val notePageDao: NotePageDao, private val noteI
     fun deleteNotePageItem(id: Long, noteId: Long) {
         notePageDao.deleteNotePageItem(id, noteId)
     }
+
+    fun update(notePage: NotePage) {
+        notePageDao.update(notePage)
+    }
 }
