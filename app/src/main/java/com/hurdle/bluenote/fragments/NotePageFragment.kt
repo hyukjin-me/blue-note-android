@@ -41,14 +41,14 @@ class NotePageFragment : Fragment() {
     var isEdit = false
 
     private var noteId: Long = -1L
+    private var title = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        val title = NotePageFragmentArgs.fromBundle(requireArguments()).title
+        title = NotePageFragmentArgs.fromBundle(requireArguments()).title
         noteId = NotePageFragmentArgs.fromBundle(requireArguments()).id
-        val activity = activity as MainActivity
-        activity.setToolbarTitle(title)
+        setTitle(title)
     }
 
     override fun onCreateView(
@@ -132,6 +132,57 @@ class NotePageFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        // 다른화면 이동후 재 진입시 타이틀 라벨 변경 방지
+        setTitle(title)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard(binding.root)
+        // 다른 화면 이동후 노트페이지 화면으로 재진입시 기존 displayDay 변수에 저장된 날짜의 시간 뷰가 모두 GONE 처리되어 "" 처리함
+        checkDay = ""
+        isEdit = false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.forEach {
+            when (it.itemId) {
+                R.id.menu_edit -> it.isVisible = true
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_edit -> {
+                isEdit = !isEdit
+
+                if (isEdit) {
+                    item.setIcon(R.drawable.ic_baseline_edit_24_red)
+                } else {
+                    item.setIcon(R.drawable.ic_baseline_edit_24)
+                }
+
+                notePageViewModel.changeEditState(isEdit)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun hideKeyboard(it: View) {
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(it.windowToken, 0)
+    }
+
+    private fun setTitle(title: String) {
+        val activity = activity as MainActivity
+        activity.setToolbarTitle(title)
+    }
+
     private fun displayOfWeather() {
         // 날씨 텍스트 데이터 가져올때까지 숨김
         val weatherTextView = binding.notePageWeatherTextView
@@ -182,45 +233,5 @@ class NotePageFragment : Fragment() {
                 timeHandler.postDelayed(this, 1000)
             }
         })
-    }
-
-    override fun onPause() {
-        super.onPause()
-        hideKeyboard(binding.root)
-        // 다른 화면 이동후 노트페이지 화면으로 재진입시 기존 displayDay 변수에 저장된 날짜의 시간 뷰가 모두 GONE 처리되어 "" 처리함
-        checkDay = ""
-        isEdit = false
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.forEach {
-            when (it.itemId) {
-                R.id.menu_edit -> it.isVisible = true
-            }
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_edit -> {
-                isEdit = !isEdit
-
-                if (isEdit) {
-                    item.setIcon(R.drawable.ic_baseline_edit_24_red)
-                } else {
-                    item.setIcon(R.drawable.ic_baseline_edit_24)
-                }
-
-                notePageViewModel.changeEditState(isEdit)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun hideKeyboard(it: View) {
-        val imm =
-            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(it.windowToken, 0)
     }
 }
