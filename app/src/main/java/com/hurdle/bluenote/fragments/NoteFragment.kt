@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.*
-import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,8 +14,6 @@ import com.hurdle.bluenote.R
 import com.hurdle.bluenote.adapters.NoteAdapter
 import com.hurdle.bluenote.adapters.OnNoteClickListener
 import com.hurdle.bluenote.databinding.FragmentNoteBinding
-import com.hurdle.bluenote.viewmodels.NotePageViewModel
-import com.hurdle.bluenote.viewmodels.NotePageViewModelFactory
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 
 class NoteFragment : Fragment() {
@@ -121,12 +118,11 @@ class NoteFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.forEach { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menu_edit -> menuItem.isVisible = true
-                R.id.menu_delete -> menuItem.isVisible = true
-            }
-        }
+        val editMenu = menu.findItem(R.id.menu_edit)
+        editMenu.isVisible = true
+
+        val deleteMenu = menu.findItem(R.id.menu_delete)
+        deleteMenu.isVisible = true
 
         super.onCreateOptionsMenu(menu, inflater)
     }

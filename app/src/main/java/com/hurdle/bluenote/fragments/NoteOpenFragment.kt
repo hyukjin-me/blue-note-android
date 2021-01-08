@@ -78,12 +78,9 @@ class NoteOpenFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu.forEach {
-            when (it.itemId) {
-                R.id.menu_edit -> it.isVisible = true
-                R.id.menu_delete -> it.isVisible = true
-            }
-        }
+
+        menu.findItem(R.id.menu_edit).isVisible = true
+        menu.findItem(R.id.menu_delete).isVisible = true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

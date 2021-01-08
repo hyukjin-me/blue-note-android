@@ -86,13 +86,9 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main_toolbar_menu, menu)
 
         // 모든 아이템 숨김
-        menu.forEach { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menu_edit -> menuItem.isVisible = false
-                R.id.menu_delete -> menuItem.isVisible = false
-                else -> menuItem.isVisible = false
-            }
-        }
+        menu.findItem(R.id.menu_edit).isVisible = false
+        menu.findItem(R.id.menu_delete).isVisible = false
+        menu.findItem(R.id.menu_search).isVisible = false
         return true
     }
 
