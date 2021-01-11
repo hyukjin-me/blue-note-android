@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half"
+    app:cardCornerRadius="@dimen/radius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_card">
+
+        <TextView
+            android:id="@+id/sheet_list_title_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal"
+            android:layout_marginTop="@dimen/normal"
+            android:layout_marginEnd="@dimen/normal"
+            android:ellipsize="end"
+            android:lines="2"
+            android:maxLines="2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title"
+            app:layout_constraintEnd_toStartOf="@+id/sheet_list_number_text_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Android Kotlin Master Java Android Kotlin Master Java Full Scala Not Apple JavachipsFull Scala Not Apple Javachips" />
+
+        <TextView
+            android:id="@+id/sheet_list_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half"
+            android:layout_marginBottom="@dimen/normal"
+            android:textColor="@color/white"
+            android:textSize="@dimen/info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/sheet_list_title_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/sheet_list_title_text_view"
+            tools:text="2021.01.11 (Web) 12:56 PM" />
+
+        <TextView
+            android:id="@+id/sheet_list_number_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal"
+            android:layout_marginEnd="@dimen/normal"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="100" />
+
+        <CheckBox
+            android:id="@+id/sheet_list_check_box"
+            android:layout_width="@dimen/view_check_box"
+            android:layout_height="@dimen/view_check_box"
+            android:buttonTint="@color/white"
+            android:translationX="@dimen/view_check_box_translation_x"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
