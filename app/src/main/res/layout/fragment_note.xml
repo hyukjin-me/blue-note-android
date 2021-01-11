@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/note_add_fab"
         style="@style/addFabStyle"
         android:contentDescription="@string/desc_add"
         app:layout_constraintBottom_toBottomOf="parent"

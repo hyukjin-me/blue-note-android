@@ -84,7 +84,7 @@ class NoteFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        binding.floatingActionButton.setOnClickListener {
+        binding.noteAddFab.setOnClickListener {
             this.findNavController().navigate(NoteFragmentDirections.actionNavNoteToNavNoteCreate())
         }
 
