@@ -32,4 +32,6 @@
     <string name="open">Open</string>
     <string name="message">Message</string>
     <string name="close">Close</string>
+    <string name="search">Search</string>
+    <string name="search_max_count">MAX : 12 Length</string>
 </resources>

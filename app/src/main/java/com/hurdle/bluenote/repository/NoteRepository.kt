@@ -30,4 +30,7 @@ class NoteRepository(private val noteDao: NoteDao) {
 
     @WorkerThread
     fun getNote(id: Long) = noteDao.get(id)
+
+    @WorkerThread
+    fun searchNote(text: String) = noteDao.search(text)
 }

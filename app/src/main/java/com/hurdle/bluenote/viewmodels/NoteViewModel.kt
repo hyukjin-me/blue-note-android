@@ -17,6 +17,9 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val _note = MutableLiveData<Note?>()
     val note = _note
 
+    private val _searchNote = MutableLiveData<List<Note>>()
+    val searchNote = _searchNote
+
     private val _navigateToEdit = MutableLiveData<Note?>()
     val navigateToEdit = _navigateToEdit
 
@@ -66,5 +69,10 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteNotePages(id: Long) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteNotePage(id)
+    }
+
+    fun searchNote(text: String) = viewModelScope.launch(Dispatchers.IO) {
+        val searchNote: List<Note> = repository.searchNote(text)
+        _searchNote.postValue(searchNote)
     }
 }

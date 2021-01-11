@@ -1,10 +1,16 @@
 package com.hurdle.bluenote.fragments
 
 import android.app.AlertDialog
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.InputFilter
 import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.adapters.NoteAdapter
 import com.hurdle.bluenote.adapters.OnNoteClickListener
+import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.databinding.FragmentNoteBinding
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 
@@ -21,9 +28,13 @@ class NoteFragment : Fragment() {
     private lateinit var binding: FragmentNoteBinding
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var noteAdapter: NoteAdapter
+    private lateinit var searchView: SearchView
+    private lateinit var searchViewEditText: EditText
 
     private var deleteMenuItem: MenuItem? = null
     private var isDeleteButton = false
+
+    private var notes = emptyList<Note>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,7 +94,7 @@ class NoteFragment : Fragment() {
                 menuItem.setIcon(R.drawable.ic_baseline_delete_24)
                 isDeleteButton = false
             }
-
+            this.notes = notes
             noteAdapter.submitList(notes)
 
             // 데이터 추가시 스크롤이 이동이 안되는 현상 방지
@@ -115,6 +126,10 @@ class NoteFragment : Fragment() {
                 noteViewModel.doneNavigatePage()
             }
         }
+
+        noteViewModel.searchNote.observe(viewLifecycleOwner) {
+            noteAdapter.submitList(it)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -123,6 +138,60 @@ class NoteFragment : Fragment() {
 
         val deleteMenu = menu.findItem(R.id.menu_delete)
         deleteMenu.isVisible = true
+
+        menu.findItem(R.id.menu_search).apply {
+            isVisible = true
+            searchView = this.actionView as SearchView
+        }
+
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+        searchView.apply {
+            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+            setIconifiedByDefault(true)
+            searchViewEditText =
+                this.findViewById(androidx.appcompat.R.id.search_src_text)
+            // 글자수 제한
+            searchViewEditText.filters = arrayOf(InputFilter.LengthFilter(12))
+
+            this.setOnQueryTextFocusChangeListener { _, hasFocus ->
+                when (hasFocus) {
+                    true -> {
+                        editMenu.isVisible = false
+                        deleteMenu.isVisible = false
+                    }
+                    false -> {
+                        editMenu.isVisible = true
+                        deleteMenu.isVisible = true
+
+                        noteAdapter.submitList(notes)
+                    }
+                }
+            }
+
+            this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if (!query.isNullOrEmpty()) {
+                        noteViewModel.searchNote("%$query%")
+                    }
+                    hideKeyboard(binding.root)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    val inputText = newText ?: ""
+                    if (inputText.count() >= 12) {
+                        Snackbar.make(
+                            binding.root,
+                            context.getString(R.string.search_max_count),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                    return true
+                }
+            })
+        }
 
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -161,5 +230,12 @@ class NoteFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         isDeleteButton = false
+        notes = emptyList()
+    }
+
+    private fun hideKeyboard(it: View) {
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(it.windowToken, 0)
     }
 }

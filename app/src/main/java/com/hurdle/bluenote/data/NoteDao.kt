@@ -22,4 +22,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM note_table WHERE id = :key LIMIT 1")
     fun get(key: Long): Note
+
+    @Query("SELECT * FROM note_table WHERE title LIKE :text")
+    fun search(text: String): List<Note>
 }
