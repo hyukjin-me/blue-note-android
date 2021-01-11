@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.hurdle.bluenote.databinding.FragmentSheetBinding
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 
@@ -28,5 +29,14 @@ class SheetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+
+        binding.sheetAddFab.setOnClickListener {
+            // 시트생성화면으로 이동
+            navigateCreatePage()
+        }
+    }
+
+    private fun navigateCreatePage() {
+        this.findNavController().navigate(SheetFragmentDirections.actionNavSheetToNavSheetCreate())
     }
 }

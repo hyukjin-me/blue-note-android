@@ -74,9 +74,18 @@ class MainActivity : AppCompatActivity() {
                     // 하단뷰 숨김
                     bottomNavView.visibility = View.GONE
                 }
-                R.id.nav_sheet ->{
+                R.id.nav_sheet -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_ballot_24)
                     toolbar.setNavigationOnClickListener {
+                    }
+                    // 하단뷰 보임
+                    bottomNavView.visibility = View.VISIBLE
+                }
+                R.id.nav_sheet_create -> {
+                    toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+                    // 뒤로가기
+                    toolbar.setNavigationOnClickListener {
+                        controller.popBackStack()
                     }
                     // 하단뷰 보임
                     bottomNavView.visibility = View.VISIBLE

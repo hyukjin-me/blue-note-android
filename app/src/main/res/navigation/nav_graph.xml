@@ -30,7 +30,11 @@
         android:id="@+id/nav_sheet"
         android:name="com.hurdle.bluenote.fragments.SheetFragment"
         android:label="@string/fragment_sheet"
-        tools:layout="@layout/fragment_sheet" />
+        tools:layout="@layout/fragment_sheet" >
+        <action
+            android:id="@+id/action_nav_sheet_to_nav_sheet_create"
+            app:destination="@id/nav_sheet_create" />
+    </fragment>
     <fragment
         android:id="@+id/nav_note_create"
         android:name="com.hurdle.bluenote.fragments.NoteCreateFragment"
@@ -68,4 +72,9 @@
             android:name="note_id"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_sheet_create"
+        android:name="com.hurdle.bluenote.fragments.SheetCreateFragment"
+        android:label="@string/fragment_sheet_create"
+        tools:layout="@layout/fragment_sheet_create"/>
 </navigation>

@@ -8,6 +8,7 @@
     <string name="fragment_note_page">Note Page</string>
     <string name="fragment_note_open">Note Open</string>
     <string name="fragment_sheet">Sheet</string>
+    <string name="fragment_sheet_create">Create Sheet</string>
     <string name="fragment_more">More</string>
 
     <!-- 노트생성 화면의 유저가 입력한 텍스트의 갯수-->
@@ -34,4 +35,9 @@
     <string name="close">Close</string>
     <string name="search">Search</string>
     <string name="search_max_count">MAX : 12 Length</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+    <string name="information">information</string>
+    <string name="hint_start">ex) 1 ~ </string>
+    <string name="hint_end"> ~ 200</string>
 </resources>
