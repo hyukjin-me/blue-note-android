@@ -21,6 +21,7 @@ import com.hurdle.bluenote.adapters.NoteAdapter
 import com.hurdle.bluenote.adapters.OnNoteClickListener
 import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.databinding.FragmentNoteBinding
+import com.hurdle.bluenote.utils.MAX_SEARCH_LENGTH
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 
 class NoteFragment : Fragment() {
@@ -152,8 +153,9 @@ class NoteFragment : Fragment() {
             setIconifiedByDefault(true)
             searchViewEditText =
                 this.findViewById(androidx.appcompat.R.id.search_src_text)
+
             // 글자수 제한
-            searchViewEditText.filters = arrayOf(InputFilter.LengthFilter(12))
+            searchViewEditText.filters = arrayOf(InputFilter.LengthFilter(MAX_SEARCH_LENGTH))
 
             this.setOnQueryTextFocusChangeListener { _, hasFocus ->
                 when (hasFocus) {
@@ -230,7 +232,7 @@ class NoteFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         isDeleteButton = false
-        notes = emptyList()
+        noteAdapter.submitList(notes)
     }
 
     private fun hideKeyboard(it: View) {

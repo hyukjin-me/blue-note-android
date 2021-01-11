@@ -1,23 +1,27 @@
 package com.hurdle.bluenote.fragments
 
+import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
+import android.text.InputFilter
 import android.view.*
 import android.view.inputmethod.InputMethodManager
-import androidx.core.view.forEach
+import android.widget.EditText
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.adapters.NotePageAdapter
 import com.hurdle.bluenote.adapters.OnNotePageClickListener
 import com.hurdle.bluenote.data.NotePage
 import com.hurdle.bluenote.databinding.FragmentNotePageBinding
+import com.hurdle.bluenote.utils.MAX_SEARCH_LENGTH
 import com.hurdle.bluenote.utils.ONE_HOUR
 import com.hurdle.bluenote.viewmodels.NotePageViewModel
 import com.hurdle.bluenote.viewmodels.NotePageViewModelFactory
@@ -36,10 +40,10 @@ class NotePageFragment : Fragment() {
     private lateinit var weatherViewModel: WeatherViewModel
     private lateinit var notePageAdapter: NotePageAdapter
 
-    val timeHandler = Handler(Looper.getMainLooper())
+    private val timeHandler = Handler(Looper.getMainLooper())
 
-    var isEdit = false
-
+    private var notePage: List<NotePage> = emptyList()
+    private var isEdit = false
     private var noteId: Long = -1L
     private var title = ""
 
@@ -86,6 +90,7 @@ class NotePageFragment : Fragment() {
 
         // 데이터 출력
         notePageViewModel.notePage.observe(viewLifecycleOwner) { page ->
+            notePage = page
             notePageAdapter.submitList(page)
 
             Handler(Looper.getMainLooper()).postDelayed(object : Runnable {
@@ -136,6 +141,7 @@ class NotePageFragment : Fragment() {
         super.onResume()
         // 다른화면 이동후 재 진입시 타이틀 라벨 변경 방지
         setTitle(title)
+        notePage = emptyList()
     }
 
     override fun onPause() {
@@ -150,6 +156,53 @@ class NotePageFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
 
         menu.findItem(R.id.menu_edit).isVisible = true
+
+        menu.findItem(R.id.menu_search).isVisible = true
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+        val searchViewEditText: EditText
+        searchView.apply {
+            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+            setIconifiedByDefault(true)
+            searchViewEditText =
+                this.findViewById(androidx.appcompat.R.id.search_src_text)
+            // 글자수 제한
+            searchViewEditText.filters = arrayOf(InputFilter.LengthFilter(MAX_SEARCH_LENGTH))
+
+            this.setOnQueryTextFocusChangeListener { _, hasFocus ->
+                when (hasFocus) {
+                    true -> {
+                    }
+                    false -> {
+                        notePageAdapter.submitList(notePage)
+                    }
+                }
+            }
+
+            this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if (!query.isNullOrEmpty()) {
+                        val searchResult = notePage.filter { it.content.contains(query) }
+                        notePageAdapter.submitList(searchResult)
+                    }
+                    hideKeyboard(binding.root)
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    val inputText = newText ?: ""
+                    if (inputText.count() >= MAX_SEARCH_LENGTH) {
+                        Snackbar.make(
+                            binding.root,
+                            context.getString(R.string.search_max_count),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                    return true
+                }
+            })
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

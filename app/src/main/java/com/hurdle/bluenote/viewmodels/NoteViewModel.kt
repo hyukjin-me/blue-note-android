@@ -17,7 +17,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val _note = MutableLiveData<Note?>()
     val note = _note
 
-    private val _searchNote = MutableLiveData<List<Note>>()
+    private val _searchNote = MutableLiveData<List<Note>?>()
     val searchNote = _searchNote
 
     private val _navigateToEdit = MutableLiveData<Note?>()
