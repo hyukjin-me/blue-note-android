@@ -17,6 +17,8 @@
     <string name="display_title">%s</string>
     <!-- 노트 페이지 화면의 날씨 정보 -->
     <string name="display_weather" translatable="false">Today %s°C, %s in %s</string>
+    <!-- 시트 화면의 Question 갯수 ex) 1-20 -->
+    <string name="display_question_range">%d-%d</string>
 
     <string name="desc_add">add</string>
 
@@ -34,10 +36,11 @@
     <string name="message">Message</string>
     <string name="close">Close</string>
     <string name="search">Search</string>
-    <string name="search_max_count">MAX : 12 Length</string>
+    <string name="search_max_count">1 ~ 12 Length</string>
     <string name="start">Start</string>
     <string name="end">End</string>
     <string name="information">information</string>
     <string name="hint_start">ex) 1 ~ </string>
     <string name="hint_end"> ~ 200</string>
+    <string name="sheet_creation_range">1 ~ 200 Range</string>
 </resources>

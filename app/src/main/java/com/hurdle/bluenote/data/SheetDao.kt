@@ -1,0 +1,25 @@
+package com.hurdle.bluenote.data
+
+import androidx.lifecycle.LiveData
+import androidx.room.*
+
+@Dao
+interface SheetDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(sheet: Sheet)
+
+    @Update
+    fun update(sheet: Sheet)
+
+    @Delete
+    fun delete(sheet: Sheet)
+
+    @Query("SELECT * FROM sheet ORDER BY id DESC")
+    fun getAll(): LiveData<List<Sheet>>
+
+    @Query("SELECT * FROM sheet WHERE id = :key")
+    fun get(key: Long): Sheet
+
+    @Query("SELECT * FROM sheet WHERE title LIKE :text")
+    fun searchSheet(text: String): List<Sheet>
+}

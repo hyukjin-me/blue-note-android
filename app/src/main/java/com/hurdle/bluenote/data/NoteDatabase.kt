@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Note::class, NotePage::class, WeatherCache::class],
+    entities = [Note::class, NotePage::class, WeatherCache::class, Sheet::class],
     version = 1,
     exportSchema = false
 )
@@ -15,6 +15,7 @@ abstract class NoteDatabase : RoomDatabase() {
     abstract val noteDao: NoteDao
     abstract val notePageDao: NotePageDao
     abstract val weatherDao: WeatherDao
+    abstract val sheetDao: SheetDao
 
     companion object {
         @Volatile
