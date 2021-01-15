@@ -1,8 +1,8 @@
 package com.hurdle.bluenote.fragments
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.data.Sheet
 import com.hurdle.bluenote.databinding.FragmentSheetCreateBinding
@@ -21,6 +22,19 @@ class SheetCreateFragment : Fragment() {
 
     private lateinit var binding: FragmentSheetCreateBinding
     private lateinit var sheetViewModel: SheetViewModel
+
+    private var sheetId = -1L
+    private var sheet: Sheet? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        sheetId = SheetCreateFragmentArgs.fromBundle(requireArguments()).id
+        if (sheetId != -1L) {
+            val activity = activity as MainActivity
+            activity.setToolbarTitle(getString(R.string.edit_mode))
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,16 +50,62 @@ class SheetCreateFragment : Fragment() {
 
         sheetViewModel = ViewModelProvider(this).get(SheetViewModel::class.java)
 
+        // 편집모드
+        if (sheetId != -1L) {
+            // Sheet 데이터 조회
+            sheetViewModel.getSheet(sheetId)
+        }
+
+        sheetViewModel.sheet.observe(viewLifecycleOwner) {
+            if (it != null) {
+                this.sheet = it
+
+                binding.apply {
+                    sheetCreateTitleInputEditText.setText(it.title)
+
+                    sheetCreateStartEditText.setText(it.start.toString())
+                    sheetCreateStartEditText.setTextColor(Color.GRAY)
+                    sheetCreateStartEditText.isEnabled = false
+
+                    sheetCreateEndEditText.setText(it.end.toString())
+                    sheetCreateEndEditText.setTextColor(Color.GRAY)
+                    sheetCreateEndEditText.isEnabled = false
+
+                    sheetCreateSaveButton.text = getString(R.string.edit)
+                }
+            }
+        }
+
         binding.sheetCreateSaveButton.setOnClickListener {
-            saveSheet()
+            if (sheetId == -1L) {
+                saveSheet()
+                closeSheetCreate()
+            } else {
+                var title = binding.sheetCreateTitleInputEditText.text.toString() ?: ""
+
+                if (title.isEmpty()) {
+                    title = getString(R.string.no_title)
+                }
+
+                sheet?.title = title
+                sheetViewModel.updateSheet(sheet)
+
+                closeSheetCreate()
+            }
         }
 
         binding.sheetCreateCancelButton.setOnClickListener {
-            cancelSheetCreate()
+            closeSheetCreate()
         }
 
         binding.sheetCreateInfoImageView.setOnClickListener {
-            guideSheetRange()
+            if (sheetId == -1L) {
+                guideSheetRange()
+            } else {
+                Snackbar.make(
+                    requireView(), getString(R.string.sheet_creation_edit), Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
@@ -53,7 +113,6 @@ class SheetCreateFragment : Fragment() {
         val sheet = prepareSheet()
 
         if (sheet != null) {
-            Log.d("SHEET", "saveSheet: $sheet")
             sheetViewModel.insert(sheet)
         }
 
@@ -78,7 +137,7 @@ class SheetCreateFragment : Fragment() {
         return null
     }
 
-    private fun cancelSheetCreate() {
+    private fun closeSheetCreate() {
         hideKeyboard(binding.root)
         this.findNavController().popBackStack()
     }

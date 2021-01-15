@@ -44,6 +44,15 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteNote(note)
     }
 
+    fun deleteNotePages(id: Long) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteNotePage(id)
+    }
+
+    fun searchNote(text: String) = viewModelScope.launch(Dispatchers.IO) {
+        val searchNote: List<Note> = repository.searchNote(text)
+        _searchNote.postValue(searchNote)
+    }
+
     fun getNote(noteId: Long) = viewModelScope.launch(Dispatchers.IO) {
         val getNote = repository.getNote(noteId)
         _note.postValue(getNote)
@@ -65,14 +74,5 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
 
     fun doneNavigatePage() {
         _navigateToPage.value = null
-    }
-
-    fun deleteNotePages(id: Long) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteNotePage(id)
-    }
-
-    fun searchNote(text: String) = viewModelScope.launch(Dispatchers.IO) {
-        val searchNote: List<Note> = repository.searchNote(text)
-        _searchNote.postValue(searchNote)
     }
 }

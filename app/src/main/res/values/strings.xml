@@ -9,6 +9,7 @@
     <string name="fragment_note_open">Note Open</string>
     <string name="fragment_sheet">Sheet</string>
     <string name="fragment_sheet_create">Create Sheet</string>
+    <string name="fragment_sheet_question">Question</string>
     <string name="fragment_more">More</string>
 
     <!-- 노트생성 화면의 유저가 입력한 텍스트의 갯수-->
@@ -43,4 +44,6 @@
     <string name="hint_start">ex) 1 ~ </string>
     <string name="hint_end"> ~ 200</string>
     <string name="sheet_creation_range">1 ~ 200 Range</string>
+    <string name="sheet_creation_edit">Only the title can be changed</string>
+    <string name="no_title">No Ttitle</string>
 </resources>

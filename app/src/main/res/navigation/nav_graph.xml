@@ -30,10 +30,13 @@
         android:id="@+id/nav_sheet"
         android:name="com.hurdle.bluenote.fragments.SheetFragment"
         android:label="@string/fragment_sheet"
-        tools:layout="@layout/fragment_sheet" >
+        tools:layout="@layout/fragment_sheet">
         <action
             android:id="@+id/action_nav_sheet_to_nav_sheet_create"
             app:destination="@id/nav_sheet_create" />
+        <action
+            android:id="@+id/action_nav_sheet_to_nav_sheet_question"
+            app:destination="@id/nav_sheet_question" />
     </fragment>
     <fragment
         android:id="@+id/nav_note_create"
@@ -76,5 +79,15 @@
         android:id="@+id/nav_sheet_create"
         android:name="com.hurdle.bluenote.fragments.SheetCreateFragment"
         android:label="@string/fragment_sheet_create"
-        tools:layout="@layout/fragment_sheet_create"/>
+        tools:layout="@layout/fragment_sheet_create">
+        <argument
+            android:name="id"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_sheet_question"
+        android:name="com.hurdle.bluenote.fragments.SheetQuestionFragment"
+        android:label="@string/fragment_sheet_question"
+        tools:layout="@layout/fragment_sheet_question" />
 </navigation>

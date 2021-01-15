@@ -14,6 +14,9 @@ interface SheetDao {
     @Delete
     fun delete(sheet: Sheet)
 
+    @Query("DELETE FROM question WHERE sheet_id = :sheetId")
+    fun deleteSheetQuestions(sheetId: Long)
+
     @Query("SELECT * FROM sheet ORDER BY id DESC")
     fun getAll(): LiveData<List<Sheet>>
 

@@ -147,7 +147,8 @@ class NoteFragment : Fragment() {
 
         val searchManager =
             requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+
+        // searchView = menu.findItem(R.id.menu_search).actionView as SearchView
         searchView.apply {
             setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
             setIconifiedByDefault(true)
