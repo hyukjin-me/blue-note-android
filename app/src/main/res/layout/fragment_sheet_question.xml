@@ -1,6 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/backgroundBlue"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/sheet_question_total_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/normal"
+        android:text="@string/total"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/sheet_question_current_text_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Chronometer
+        android:id="@+id/sheet_question_total_chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/sheet_question_total_text_view"
+        app:layout_constraintStart_toStartOf="@+id/sheet_question_current_chronometer"
+        app:layout_constraintTop_toTopOf="@+id/sheet_question_total_text_view" />
+
+    <TextView
+        android:id="@+id/sheet_question_current_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/normal"
+        android:text="@string/current"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sheet_question_total_text_view" />
+
+    <Chronometer
+        android:id="@+id/sheet_question_current_chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/sheet_question_current_text_view"
+        app:layout_constraintStart_toEndOf="@+id/sheet_question_current_text_view"
+        app:layout_constraintTop_toTopOf="@+id/sheet_question_current_text_view" />
+
+    <Button
+        android:id="@+id/sheet_question_start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal"
+        android:layout_marginEnd="@dimen/normal"
+        android:text="@string/start"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/blue_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sheet_question_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sheet_question_current_text_view"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_sheet_question_list" />
+
+    <ProgressBar
+        android:id="@+id/sheet_question_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
