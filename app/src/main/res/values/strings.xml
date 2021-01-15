@@ -53,4 +53,6 @@
     <string name="e" translatable="false">E</string>
     <string name="total">Total</string>
     <string name="current">Current</string>
+    <string name="helper">Helper</string>
+    <string name="chart">Chart</string>
 </resources>
