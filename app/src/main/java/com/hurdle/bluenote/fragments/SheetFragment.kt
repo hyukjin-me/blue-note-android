@@ -115,7 +115,7 @@ class SheetFragment : Fragment() {
 
         sheetViewModel.navigateToQuestion.observe(viewLifecycleOwner) {
             if (it != null) {
-                val action = SheetFragmentDirections.actionNavSheetToNavSheetQuestion()
+                val action = SheetFragmentDirections.actionNavSheetToNavSheetQuestion(it.id, it.start, it.end, it.title)
                 this.findNavController().navigate(action)
 
                 sheetViewModel.doneNavigateQuestion()

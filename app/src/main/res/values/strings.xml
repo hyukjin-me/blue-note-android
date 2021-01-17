@@ -39,6 +39,7 @@
     <string name="search">Search</string>
     <string name="search_max_count">1 ~ 12 Length</string>
     <string name="start">Start</string>
+    <string name="stop">Stop</string>
     <string name="end">End</string>
     <string name="information">information</string>
     <string name="hint_start">ex) 1 ~ </string>

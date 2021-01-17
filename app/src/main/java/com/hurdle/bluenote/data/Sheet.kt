@@ -21,5 +21,5 @@ data class Sheet(
     val createTime: Long = System.currentTimeMillis(),
 
     @ColumnInfo(name = "total_time")
-    var totalTime: String = ""
+    var totalTime: String = "00:00"
 )

@@ -89,5 +89,18 @@
         android:id="@+id/nav_sheet_question"
         android:name="com.hurdle.bluenote.fragments.SheetQuestionFragment"
         android:label="@string/fragment_sheet_question"
-        tools:layout="@layout/fragment_sheet_question" />
+        tools:layout="@layout/fragment_sheet_question">
+        <argument
+            android:name="sheet_id"
+            app:argType="long" />
+        <argument
+            android:name="start"
+            app:argType="integer" />
+        <argument
+            android:name="end"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>
