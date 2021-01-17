@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
+import com.hurdle.bluenote.data.Question
 import com.hurdle.bluenote.data.Sheet
 import com.hurdle.bluenote.databinding.FragmentSheetQuestionBinding
 import com.hurdle.bluenote.utils.QuestionChronometer
@@ -64,6 +65,8 @@ class SheetQuestionFragment : Fragment() {
         currentChronometer = binding.sheetQuestionCurrentChronometer
 
         sheetId = SheetQuestionFragmentArgs.fromBundle(requireArguments()).sheetId
+        val startNumber = SheetQuestionFragmentArgs.fromBundle(requireArguments()).start
+        val endNumber = SheetQuestionFragmentArgs.fromBundle(requireArguments()).end
 
         sheetViewModel = ViewModelProvider(this).get(SheetViewModel::class.java)
         sheetViewModel.getSheet(sheetId)
@@ -82,6 +85,20 @@ class SheetQuestionFragment : Fragment() {
 
                 // 크로노미터 시간 db 데이터로 초기화
                 reBaseChronometer(totalChronometer, sheet.totalTime)
+            }
+        }
+
+        questionViewModel.questions.observe(viewLifecycleOwner) { questions ->
+            if (questions.count() == 0) {
+                val questionList = mutableListOf<Question>()
+
+                (startNumber..endNumber).forEach { number ->
+                    questionList.add(Question(number = number, sheetId = sheetId))
+                }
+
+                questionViewModel.insert(questionList)
+            } else {
+                // submitList
             }
         }
     }
