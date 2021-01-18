@@ -19,18 +19,18 @@ data class Question(
 
     var time: String = "00:00",
 
-    @ColumnInfo(name = "select_a")
-    var selectA: Boolean = false,
+    @ColumnInfo(name = "selector_a")
+    var a: Boolean = false,
 
-    @ColumnInfo(name = "select_b")
-    var selectB: Boolean = false,
+    @ColumnInfo(name = "selector_b")
+    var b: Boolean = false,
 
-    @ColumnInfo(name = "select_c")
-    var selectC: Boolean = false,
+    @ColumnInfo(name = "selector_c")
+    var c: Boolean = false,
 
-    @ColumnInfo(name = "select_d")
-    var selectD: Boolean = false,
+    @ColumnInfo(name = "selector_d")
+    var d: Boolean = false,
 
-    @ColumnInfo(name = "select_e")
-    var selectE: Boolean = false
+    @ColumnInfo(name = "selector_e")
+    var e: Boolean = false
 )
