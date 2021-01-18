@@ -9,8 +9,11 @@ import android.widget.Chronometer
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
+import com.hurdle.bluenote.adapters.OnQuestionClickListener
+import com.hurdle.bluenote.adapters.SheetQuestionAdapter
 import com.hurdle.bluenote.data.Question
 import com.hurdle.bluenote.data.Sheet
 import com.hurdle.bluenote.databinding.FragmentSheetQuestionBinding
@@ -35,6 +38,8 @@ class SheetQuestionFragment : Fragment() {
     private lateinit var startButton: Button
     private lateinit var totalChronometer: Chronometer
     private lateinit var currentChronometer: Chronometer
+
+    private lateinit var sheetQuestionAdapter: SheetQuestionAdapter
 
     private var sheetId: Long = -1L
     private var sheet: Sheet? = null
@@ -75,6 +80,23 @@ class SheetQuestionFragment : Fragment() {
         val factory = SheetQuestionViewModelFactory(application, sheetId)
         questionViewModel = ViewModelProvider(this, factory).get(SheetQuestionViewModel::class.java)
 
+        sheetQuestionAdapter = SheetQuestionAdapter(OnQuestionClickListener { question: Question ->
+
+            // 데이터 업데이트
+            questionViewModel.update(question)
+
+            // 데이터 갱신
+            sheetQuestionAdapter.notifyDataSetChanged()
+        })
+
+        binding.sheetQuestionList.apply {
+            adapter = sheetQuestionAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            // 아이템 버튼 클릭시 뷰 전체가 깜빡이는 현상 제거
+            itemAnimator = null
+            setHasFixedSize(true)
+        }
+
         startButton.setOnClickListener {
             startSheet()
         }
@@ -98,7 +120,7 @@ class SheetQuestionFragment : Fragment() {
 
                 questionViewModel.insert(questionList)
             } else {
-                // submitList
+                sheetQuestionAdapter.submitList(questions)
             }
         }
     }
