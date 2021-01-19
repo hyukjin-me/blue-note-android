@@ -15,5 +15,5 @@
     <dimen name="button_max_height">48dp</dimen>
     <dimen name="view_check_box">48sp</dimen>
     <dimen name="view_check_box_translation_x">12dp</dimen>
-    <dimen name="question_size">50dp</dimen>
+    <dimen name="question_size">48dp</dimen>
 </resources>
