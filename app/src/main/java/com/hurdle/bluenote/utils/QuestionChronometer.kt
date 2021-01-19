@@ -38,15 +38,25 @@ object QuestionChronometer {
         val minute: Int = splitTimeText[0].toInt()
         val second: Int = splitTimeText[1].toInt()
 
-        var baseTime = minute * 60000 + second * 1000
-        chronometer.base = SystemClock.elapsedRealtime() - baseTime
+        if (minute == 0 && second == 0) {
+            chronometer.base = SystemClock.elapsedRealtime()
+        } else {
+            val baseTime = minute * 60000 + second * 1000
+            chronometer.base = SystemClock.elapsedRealtime() - baseTime
+        }
+
         return chronometer
     }
 
-    // 크로노미터 Start, 1초부터 시작
+    // 크로노미터 Start, 0초부터 시작
     fun startFirstChronometer(chronometer: Chronometer) {
-        // chronometer.base = SystemClock.elapsedRealtime() - 1_000
         chronometer.base = SystemClock.elapsedRealtime()
+        chronometer.start()
+    }
+
+    // 크로노미터 Start, 1초부터 시작, 연속적으로 재시작이 필요할때 사용
+    fun resetChronometer(chronometer: Chronometer) {
+        chronometer.base = SystemClock.elapsedRealtime() - 1000
         chronometer.start()
     }
 

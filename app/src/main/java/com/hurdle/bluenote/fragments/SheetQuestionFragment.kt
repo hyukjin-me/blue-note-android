@@ -3,6 +3,7 @@ package com.hurdle.bluenote.fragments
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.*
 import android.widget.Button
 import android.widget.Chronometer
@@ -20,6 +21,7 @@ import com.hurdle.bluenote.databinding.FragmentSheetQuestionBinding
 import com.hurdle.bluenote.utils.QuestionChronometer
 import com.hurdle.bluenote.utils.QuestionChronometer.continueChronometer
 import com.hurdle.bluenote.utils.QuestionChronometer.reBaseChronometer
+import com.hurdle.bluenote.utils.QuestionChronometer.resetChronometer
 import com.hurdle.bluenote.utils.QuestionChronometer.resetElapsedRealTime
 import com.hurdle.bluenote.utils.QuestionChronometer.startFirstChronometer
 import com.hurdle.bluenote.utils.QuestionChronometer.stopChronometer
@@ -27,6 +29,8 @@ import com.hurdle.bluenote.utils.colorBlendFilter
 import com.hurdle.bluenote.viewmodels.SheetQuestionViewModel
 import com.hurdle.bluenote.viewmodels.SheetQuestionViewModelFactory
 import com.hurdle.bluenote.viewmodels.SheetViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SheetQuestionFragment : Fragment() {
 
@@ -81,6 +85,28 @@ class SheetQuestionFragment : Fragment() {
         questionViewModel = ViewModelProvider(this, factory).get(SheetQuestionViewModel::class.java)
 
         sheetQuestionAdapter = SheetQuestionAdapter(OnQuestionClickListener { question: Question ->
+            // 진행시간 업데이트
+            val currentTimeText = currentChronometer.text.toString()
+
+            val formatter = SimpleDateFormat("mm:ss", Locale.KOREA)
+            val oldTime: Date? = formatter.parse(question.time)
+            val newTime: Date? = formatter.parse(currentTimeText)
+
+            if (oldTime != null && newTime != null) {
+                // 기존시간 + 추가된 시간
+                newTime.time += oldTime.time
+
+                val currentTime: String = formatter.format(newTime)
+                question.time = currentTime
+            }
+
+            // "STOP" 버튼, 크로노미터 작동중, 0부터 다시 카운트 시작
+            if (startButton.text == resources.getText(R.string.stop)) {
+                resetChronometer(currentChronometer)
+            } else if (startButton.text == resources.getText(R.string.start)) {
+                // "START" 버튼, 크로노미터가 작동중이 아님, 0으로 변경
+                currentChronometer.base = SystemClock.elapsedRealtime()
+            }
 
             // 데이터 업데이트
             questionViewModel.update(question)
