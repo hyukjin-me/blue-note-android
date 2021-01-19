@@ -7,6 +7,7 @@ buildscript {
         circle_imageview_version= "3.0.0"
         retrofit_version = "2.9.0"
         moshi_version = "1.11.0"
+        mp_chart_version = "v3.1.0"
     }
     repositories {
         google()
@@ -25,6 +26,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 
