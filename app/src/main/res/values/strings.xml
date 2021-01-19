@@ -10,7 +10,7 @@
     <string name="fragment_sheet">Sheet</string>
     <string name="fragment_sheet_create">Create Sheet</string>
     <string name="fragment_sheet_question">Question</string>
-    <string name="fragment_sheet_chart">SheetChartFragment</string>
+    <string name="fragment_sheet_chart">Chart</string>
 
     <string name="fragment_more">More</string>
 
