@@ -78,6 +78,9 @@ class SheetQuestionAdapter(private val clickListener: OnQuestionClickListener) :
                     clickListener.onClick(item)
                 }
             }
+
+            val playText = binding.root.resources.getString(R.string.display_time)
+            binding.questionListTimeTextView.text = String.format(playText, item.time)
         }
     }
 
