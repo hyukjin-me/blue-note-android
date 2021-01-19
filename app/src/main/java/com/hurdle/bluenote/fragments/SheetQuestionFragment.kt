@@ -18,13 +18,13 @@ import com.hurdle.bluenote.adapters.SheetQuestionAdapter
 import com.hurdle.bluenote.data.Question
 import com.hurdle.bluenote.data.Sheet
 import com.hurdle.bluenote.databinding.FragmentSheetQuestionBinding
-import com.hurdle.bluenote.utils.QuestionChronometer
-import com.hurdle.bluenote.utils.QuestionChronometer.continueChronometer
-import com.hurdle.bluenote.utils.QuestionChronometer.reBaseChronometer
-import com.hurdle.bluenote.utils.QuestionChronometer.resetChronometer
-import com.hurdle.bluenote.utils.QuestionChronometer.resetElapsedRealTime
-import com.hurdle.bluenote.utils.QuestionChronometer.startFirstChronometer
-import com.hurdle.bluenote.utils.QuestionChronometer.stopChronometer
+import com.hurdle.bluenote.utils.ChronometerManager
+import com.hurdle.bluenote.utils.ChronometerManager.continueChronometer
+import com.hurdle.bluenote.utils.ChronometerManager.reBaseChronometer
+import com.hurdle.bluenote.utils.ChronometerManager.resetChronometer
+import com.hurdle.bluenote.utils.ChronometerManager.resetElapsedRealTime
+import com.hurdle.bluenote.utils.ChronometerManager.startFirstChronometer
+import com.hurdle.bluenote.utils.ChronometerManager.stopChronometer
 import com.hurdle.bluenote.utils.colorBlendFilter
 import com.hurdle.bluenote.viewmodels.SheetQuestionViewModel
 import com.hurdle.bluenote.viewmodels.SheetQuestionViewModelFactory
@@ -190,7 +190,7 @@ class SheetQuestionFragment : Fragment() {
             startButton.text = resources.getText(R.string.stop)
 
             // 앱 종료이후 화면 처음으로 진입시 lastElapsedRealTime 값은 0 이다.
-            if (QuestionChronometer.lastElapsedRealTime == 0L) {
+            if (ChronometerManager.lastElapsedRealTime == 0L) {
                 if (totalChronometer.text == "00:00") {
                     // 시작 버튼을 처음 클릭, 크로노미터 00:00 부터 시작
                     startFirstChronometer(totalChronometer)

@@ -3,7 +3,7 @@ package com.hurdle.bluenote.utils
 import android.os.SystemClock
 import android.widget.Chronometer
 
-object QuestionChronometer {
+object ChronometerManager {
     var lastElapsedRealTime = 0L
 
     fun start(chronometer: Chronometer) {
