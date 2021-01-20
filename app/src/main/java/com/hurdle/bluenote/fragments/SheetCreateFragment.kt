@@ -81,7 +81,7 @@ class SheetCreateFragment : Fragment() {
                 saveSheet()
                 closeSheetCreate()
             } else {
-                var title = binding.sheetCreateTitleInputEditText.text.toString() ?: ""
+                var title = binding.sheetCreateTitleInputEditText.text.toString()
 
                 if (title.isEmpty()) {
                     title = getString(R.string.no_title)
@@ -132,6 +132,8 @@ class SheetCreateFragment : Fragment() {
         val diff = end - start + 1
         if (start <= end && diff <= MAX_QUESTION) {
             return Sheet(title = title, start = start, end = end)
+        } else {
+            Snackbar.make(binding.root, getString(R.string.max_range), Snackbar.LENGTH_LONG).show()
         }
 
         return null

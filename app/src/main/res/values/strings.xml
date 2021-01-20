@@ -11,19 +11,23 @@
     <string name="fragment_sheet_create">Create Sheet</string>
     <string name="fragment_sheet_question">Question</string>
     <string name="fragment_sheet_chart">Chart</string>
-
     <string name="fragment_more">More</string>
 
     <!-- 노트생성 화면의 유저가 입력한 텍스트의 갯수-->
     <string name="display_count">%s/100</string>
+
     <!-- 노트 화면 리스트의 타이틀-->
     <string name="display_title">%s</string>
+
     <!-- 노트 페이지 화면의 날씨 정보 -->
     <string name="display_weather" translatable="false">Today %s°C, %s in %s</string>
+
     <!-- 시트 화면의 Question 갯수 ex) 1-20 -->
     <string name="display_question_range">%d-%d</string>
+
     <!-- Question 화면에서 문제마다 current 시간 표시 -->
     <string name="display_time">Progress : %s</string>
+
     <!-- 차트화면에서 보여줄 타이틀-->
     <string name="display_chart_title">Chart : %s, time : %s</string>
     <string name="display_chart_info">%d Question, +%d, -%d</string>
@@ -66,4 +70,5 @@
     <string name="error">Error</string>
     <string name="correct">( O )</string>
     <string name="wrong">( X )</string>
+    <string name="max_range">Error,  Max 1~200</string>
 </resources>
