@@ -1,7 +1,12 @@
 package com.hurdle.bluenote.adapters
 
+import android.content.Context
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -87,11 +92,24 @@ class SheetQuestionAdapter(private val clickListener: OnQuestionClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SheetQuestionViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemSheetQuestionListBinding.inflate(inflater, parent, false)
+
+        // 마진 top 변경
+        val layoutParams = binding.questionListCardView.layoutParams
+        val marginLayoutParams = layoutParams as ViewGroup.MarginLayoutParams
+        val dimension = binding.root.context.getDimension(10f)
+        marginLayoutParams.topMargin = dimension
+
         return SheetQuestionViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SheetQuestionViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
+    }
+
+    private fun Context.getDimension(value: Float): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, value, this.resources.displayMetrics
+        ).toInt()
     }
 }
 
