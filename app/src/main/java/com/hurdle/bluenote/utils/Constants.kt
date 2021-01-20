@@ -8,4 +8,4 @@ const val ONE_HOUR = 60 * ONE_MINUTE
 const val MAX_SEARCH_LENGTH = 12
 
 // 시트 생성시 최대로 생성할 수 있는 Question 갯수
-const val MAX_QUESTION = 45
+const val MAX_QUESTION = 200
