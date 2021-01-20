@@ -110,5 +110,9 @@
         android:id="@+id/nav_sheet_chart"
         android:name="com.hurdle.bluenote.fragments.SheetChartFragment"
         android:label="@string/fragment_sheet_chart"
-        tools:layout="@layout/fragment_sheet_chart" />
+        tools:layout="@layout/fragment_sheet_chart">
+        <argument
+            android:name="sheet_id"
+            app:argType="long" />
+    </fragment>
 </navigation>

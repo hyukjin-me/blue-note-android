@@ -24,6 +24,9 @@
     <string name="display_question_range">%d-%d</string>
     <!-- Question 화면에서 문제마다 current 시간 표시 -->
     <string name="display_time">Progress : %s</string>
+    <!-- 차트화면에서 보여줄 타이틀-->
+    <string name="display_chart_title">Chart : %s, time : %s</string>
+    <string name="display_chart_info">%d Question, +%d, -%d</string>
 
     <string name="desc_add">add</string>
 
@@ -60,4 +63,7 @@
     <string name="current">Current</string>
     <string name="helper">Helper</string>
     <string name="chart">Chart</string>
+    <string name="error">Error</string>
+    <string name="correct">( O )</string>
+    <string name="wrong">( X )</string>
 </resources>

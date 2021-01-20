@@ -1,82 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/sheet_chart_scrollview"
     style="@style/backgroundBlue"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/sheet_chart_title_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/normal"
+        android:layout_marginEnd="@dimen/normal"
+        android:text="@string/fragment_sheet_chart"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/sheet_chart_title_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal"
-            android:layout_marginTop="@dimen/normal"
-            android:layout_marginEnd="@dimen/normal"
-            android:text="@string/fragment_sheet_chart"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/sheet_chart_line_chart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/normal"
+        android:layout_marginEnd="@dimen/normal"
+        android:layout_marginBottom="@dimen/normal"
+        app:layout_constraintBottom_toTopOf="@+id/sheet_chart_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sheet_chart_title_text_view" />
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/sheet_chart_line_chart"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/normal"
-            android:layout_marginTop="@dimen/normal"
-            android:layout_marginEnd="@dimen/normal"
-            android:layout_marginBottom="@dimen/normal"
-            app:layout_constraintBottom_toTopOf="@+id/sheet_chart_guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sheet_chart_title_text_view" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/sheet_chart_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/sheet_chart_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+    <TextView
+        android:id="@+id/sheet_chart_info_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/half"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sheet_chart_guideline"
+        tools:text="Title" />
 
-        <TextView
-            android:id="@+id/sheet_chart_info_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal"
-            android:layout_marginTop="@dimen/half"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/sheet_chart_guideline"
-            tools:text="Title" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sheet_chart_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/normal"
+        android:layout_marginEnd="@dimen/normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sheet_chart_info_text_view" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/sheet_chart_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/normal"
-            android:layout_marginTop="@dimen/normal"
-            android:layout_marginEnd="@dimen/normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sheet_chart_info_text_view" />
-
-        <ProgressBar
-            android:id="@+id/sheet_chart_progress_bar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <ProgressBar
+        android:id="@+id/sheet_chart_progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

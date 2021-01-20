@@ -10,6 +10,7 @@ import android.widget.Chronometer
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
@@ -149,6 +150,16 @@ class SheetQuestionFragment : Fragment() {
                 sheetQuestionAdapter.submitList(questions)
             }
         }
+
+        questionViewModel.navigateToChart.observe(viewLifecycleOwner) {
+            if (it != null) {
+                val action =
+                    SheetQuestionFragmentDirections.actionNavSheetQuestionToNavSheetChart(it)
+                this.findNavController().navigate(action)
+
+                questionViewModel.doneNavigateToChart()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -168,6 +179,25 @@ class SheetQuestionFragment : Fragment() {
                 R.id.menu_helper -> menuItem.icon.colorFilter =
                     colorBlendFilter(Color.WHITE)
             }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_chart -> {
+                navigateChart()
+                return true
+            }
+            R.id.menu_helper -> {
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun navigateChart() {
+        if (sheetId != -1L) {
+            questionViewModel.navigateToChart(sheetId)
         }
     }
 
