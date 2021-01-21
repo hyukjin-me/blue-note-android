@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/normal"
+    android:background="@color/blue_bg">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/helper_sheet_top_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_weather"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white">
+
+        <ImageView
+            android:id="@+id/helper_sheet_close_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/half"
+            android:contentDescription="@string/close"
+            android:src="@drawable/ic_baseline_close_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/helper_sheet_more_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/half"
+            android:contentDescription="@string/more"
+            android:src="@drawable/ic_baseline_more_horiz_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/helper_sheet_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/helper_sheet_more_image_view"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2021 01 Quest" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/helper_sheet_selector_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helper_sheet_top_container">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/helper_sheet_list"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/view_max_height"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_sheet_question_list" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/helper_sheet_next_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="@dimen/small"
+        android:layout_marginEnd="@dimen/half"
+        android:layout_marginBottom="@dimen/mini"
+        android:background="@drawable/bg_square"
+        android:src="@drawable/ic_baseline_navigate_next_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helper_sheet_selector_container" />
+
+    <ImageView
+        android:id="@+id/helper_sheet_previous_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="@dimen/half"
+        android:background="@drawable/bg_square"
+        android:src="@drawable/ic_baseline_navigate_before_24"
+        app:layout_constraintBottom_toBottomOf="@+id/helper_sheet_next_button"
+        app:layout_constraintEnd_toStartOf="@+id/helper_sheet_next_button"
+        app:layout_constraintTop_toTopOf="@+id/helper_sheet_next_button" />
+
+    <Chronometer
+        android:id="@+id/helper_sheet_total_time_chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/helper_sheet_play_button"
+        app:layout_constraintTop_toBottomOf="@+id/helper_sheet_selector_container" />
+
+    <Chronometer
+        android:id="@+id/helper_sheet_current_time_chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/half"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/helper_sheet_total_time_chronometer"
+        app:layout_constraintTop_toBottomOf="@+id/helper_sheet_selector_container" />
+
+    <ImageView
+        android:id="@+id/helper_sheet_play_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/half"
+        android:background="@drawable/bg_square"
+        android:contentDescription="@string/play"
+        android:src="@drawable/ic_baseline_play_arrow_24"
+        android:tag="stop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/helper_sheet_selector_container"
+        app:tint="@color/white" />
+</androidx.constraintlayout.widget.ConstraintLayout>

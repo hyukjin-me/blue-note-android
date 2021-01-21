@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue_bg">
+
+    <ImageView
+        android:id="@+id/helper_notification_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/normal"
+        android:src="@drawable/ic_baseline_assistant_24"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/helper_notification_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_toEndOf="@+id/helper_notification_image_view"
+        android:text="@string/notification_helper"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/helper_notification_close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@color/blue_btn"
+        android:text="@string/close"
+        android:textColor="@color/white" />
+</RelativeLayout>

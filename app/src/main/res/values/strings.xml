@@ -13,6 +13,8 @@
     <string name="fragment_sheet_chart">Chart</string>
     <string name="fragment_more">More</string>
 
+    <string name="notification_name" translatable="false">mini_service_notification</string>
+
     <!-- 노트생성 화면의 유저가 입력한 텍스트의 갯수-->
     <string name="display_count">%s/100</string>
 
@@ -71,4 +73,13 @@
     <string name="correct">( O )</string>
     <string name="wrong">( X )</string>
     <string name="max_range">Error,  Max 1~200</string>
+    <string name="permission_guide_system_overlay">Permission Notice\n\nTo use helper service, you need to consent to the  \'System overlay window\' permission.</string>
+    <string name="ok">OK</string>
+    <string name="icon">icon</string>
+    <string name="more">more</string>
+    <string name="next"><![CDATA[>]]></string>
+    <string name="previous"><![CDATA[<]]></string>
+    <string name="play">play</string>
+    <string name="notification_helper">Helper is running</string>
+    <string name="preference_file_key">helper_state</string>
 </resources>

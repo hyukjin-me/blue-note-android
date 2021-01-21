@@ -1,12 +1,18 @@
 package com.hurdle.bluenote.fragments
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.provider.Settings
 import android.view.*
 import android.widget.Button
 import android.widget.Chronometer
+import androidx.annotation.RequiresApi
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +25,7 @@ import com.hurdle.bluenote.adapters.SheetQuestionAdapter
 import com.hurdle.bluenote.data.Question
 import com.hurdle.bluenote.data.Sheet
 import com.hurdle.bluenote.databinding.FragmentSheetQuestionBinding
+import com.hurdle.bluenote.service.SheetHelperService
 import com.hurdle.bluenote.utils.ChronometerManager
 import com.hurdle.bluenote.utils.ChronometerManager.continueChronometer
 import com.hurdle.bluenote.utils.ChronometerManager.reBaseChronometer
@@ -26,6 +33,9 @@ import com.hurdle.bluenote.utils.ChronometerManager.resetChronometer
 import com.hurdle.bluenote.utils.ChronometerManager.resetElapsedRealTime
 import com.hurdle.bluenote.utils.ChronometerManager.startFirstChronometer
 import com.hurdle.bluenote.utils.ChronometerManager.stopChronometer
+import com.hurdle.bluenote.utils.HelperConstants.INIT_NONE
+import com.hurdle.bluenote.utils.HelperConstants.REQUEST_CODE_OVERLAY_PERMISSION
+import com.hurdle.bluenote.utils.HelperConstants.SHEET_ID
 import com.hurdle.bluenote.utils.colorBlendFilter
 import com.hurdle.bluenote.viewmodels.SheetQuestionViewModel
 import com.hurdle.bluenote.viewmodels.SheetQuestionViewModelFactory
@@ -189,16 +199,11 @@ class SheetQuestionFragment : Fragment() {
                 return true
             }
             R.id.menu_helper -> {
+                prepareHelper()
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun navigateChart() {
-        if (sheetId != -1L) {
-            questionViewModel.navigateToChart(sheetId)
-        }
     }
 
     override fun onResume() {
@@ -260,6 +265,67 @@ class SheetQuestionFragment : Fragment() {
             this.sheet?.totalTime = totalChronometerText
 
             sheetViewModel.updateSheet(sheet)
+        }
+    }
+
+    private fun navigateChart() {
+        if (sheetId != -1L) {
+            questionViewModel.navigateToChart(sheetId)
+        }
+    }
+
+    private fun prepareHelper() {
+        checkApiLevelForHelper()
+    }
+
+    private fun checkApiLevelForHelper() {
+        // 안드로이드 API 23 확인
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermissionForHelper()
+        } else {
+            // API 가 낮아 명시적 권한 동의 없이 서비스 실행가능
+            startMiniService()
+        }
+    }
+
+    // 헬퍼 기능을 사용하기위해서 '다른앱 위에 그리기' 권한 동의가 필요합니다.
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun checkPermissionForHelper() {
+        if (!Settings.canDrawOverlays(requireContext())) {
+            // 권한동의 안내 다이얼로그
+            permissionGuideDialog()
+        } else {
+            // 안드로이드 API 23이상이지만 사용자가 이미 권한 동의를 하였음
+            startMiniService()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun permissionGuideDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage(R.string.permission_guide_system_overlay)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:${requireContext().packageName}")
+                )
+                startActivityForResult(intent, REQUEST_CODE_OVERLAY_PERMISSION)
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+            }
+            .create()
+
+        builder.show()
+    }
+
+    private fun startMiniService() {
+        val intent = Intent(requireContext(), SheetHelperService::class.java)
+        intent.putExtra(SHEET_ID, sheetId)
+        intent.action = INIT_NONE
+
+        requireActivity().apply {
+            startService(intent)
+            this.finish()
         }
     }
 }

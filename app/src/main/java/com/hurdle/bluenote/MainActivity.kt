@@ -1,10 +1,14 @@
 package com.hurdle.bluenote
 
+import android.app.PendingIntent
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.edit
 import androidx.core.view.forEach
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -13,6 +17,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.hurdle.bluenote.service.SheetHelperService
+import com.hurdle.bluenote.utils.HelperConstants
+import com.hurdle.bluenote.utils.HelperConstants.EXPANSION_VIEW
+import com.hurdle.bluenote.utils.HelperConstants.ICON_VIEW
+import com.hurdle.bluenote.utils.HelperConstants.INIT_NONE
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +47,14 @@ class MainActivity : AppCompatActivity() {
         bottomNavView = findViewById(R.id.main_bottom_nav)
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavView.setupWithNavController(navController)
+
+        // 포그라운드 서비스로 화면 재진입시 기존 서비스 종료
+        if (intent.action == INIT_NONE) {
+            val intent = Intent(this, SheetHelperService::class.java).apply {
+                action = null
+            }
+            startService(intent)
+        }
 
         navController.addOnDestinationChangedListener { controller, destination, _ ->
             when (destination.id) {
