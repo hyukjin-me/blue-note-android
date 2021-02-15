@@ -155,6 +155,12 @@ class MainActivity : AppCompatActivity() {
 
                     drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
+                R.id.nav_more -> {
+                    toolbar.setNavigationIcon(R.drawable.ic_baseline_more_horiz_24)
+                    toolbar.setNavigationOnClickListener {
+                    }
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                }
             }
         }
 
