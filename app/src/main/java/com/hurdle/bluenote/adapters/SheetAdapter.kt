@@ -1,5 +1,8 @@
 package com.hurdle.bluenote.adapters
 
+import android.util.DisplayMetrics
+import android.util.Log
+import android.view.Display
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +14,11 @@ import com.hurdle.bluenote.databinding.ItemSheetListBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SheetAdapter(private val clickListener: OnSheetClickListener) :
+
+class SheetAdapter(
+    private val horizontal: Boolean = false,
+    private val clickListener: OnSheetClickListener
+) :
     ListAdapter<Sheet, SheetAdapter.SheetViewHolder>(SheetDiffUtil) {
 
     class SheetViewHolder(private val binding: ItemSheetListBinding) :
@@ -46,6 +53,14 @@ class SheetAdapter(private val clickListener: OnSheetClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SheetViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemSheetListBinding.inflate(inflater, parent, false)
+
+        if (horizontal) {
+            val metrics: DisplayMetrics = binding.root.resources.displayMetrics
+            val screenHeight = metrics.heightPixels
+            val width = screenHeight / 3
+            binding.sheetListCardView.layoutParams.width = width
+        }
+
         return SheetViewHolder(binding)
     }
 

@@ -1,7 +1,6 @@
 package com.hurdle.bluenote.adapters
 
-import android.app.ActionBar
-import android.util.Log
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.databinding.ItemNoteListBinding
-import kotlin.math.min
 
 class NoteAdapter(
     private val horizontal: Boolean = false,
@@ -44,7 +42,10 @@ class NoteAdapter(
         val binding = ItemNoteListBinding.inflate(inflater, parent, false)
 
         if (horizontal) {
-            binding.noteListCardView.layoutParams.width = 500
+            val metrics: DisplayMetrics = binding.root.resources.displayMetrics
+            val screenHeight = metrics.heightPixels
+            val width = screenHeight / 4
+            binding.noteListCardView.layoutParams.width = width
         }
 
         return NoteViewHolder(binding)

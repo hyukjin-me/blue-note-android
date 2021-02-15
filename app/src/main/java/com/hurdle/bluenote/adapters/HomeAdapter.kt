@@ -2,7 +2,6 @@ package com.hurdle.bluenote.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -46,7 +45,7 @@ class HomeAdapter : ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) 
 
                 val sheets = item.sheets
 
-                val sheetAdapter = SheetAdapter(OnSheetClickListener { sheet, _ ->
+                val sheetAdapter = SheetAdapter(horizontal = true, OnSheetClickListener { sheet, _ ->
 
                 })
 

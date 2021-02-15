@@ -54,7 +54,7 @@ class SheetFragment : Fragment() {
 
         sheetViewModel = ViewModelProvider(this).get(SheetViewModel::class.java)
 
-        sheetAdapter = SheetAdapter(OnSheetClickListener { sheet, isLongClick ->
+        sheetAdapter = SheetAdapter(clickListener = OnSheetClickListener { sheet, isLongClick ->
             if (!isDeleteButton) {
                 if (isLongClick) {
                     // 편집화면으로 이동
@@ -115,7 +115,12 @@ class SheetFragment : Fragment() {
 
         sheetViewModel.navigateToQuestion.observe(viewLifecycleOwner) {
             if (it != null) {
-                val action = SheetFragmentDirections.actionNavSheetToNavSheetQuestion(it.id, it.start, it.end, it.title)
+                val action = SheetFragmentDirections.actionNavSheetToNavSheetQuestion(
+                    it.id,
+                    it.start,
+                    it.end,
+                    it.title
+                )
                 this.findNavController().navigate(action)
 
                 sheetViewModel.doneNavigateQuestion()
