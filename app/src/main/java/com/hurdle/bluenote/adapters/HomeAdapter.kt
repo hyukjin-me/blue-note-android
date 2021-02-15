@@ -12,11 +12,12 @@ import com.hurdle.bluenote.databinding.ItemHomeListBinding
 import com.hurdle.bluenote.utils.NOTE
 import com.hurdle.bluenote.utils.SHEET
 
-class HomeAdapter : ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) {
+class HomeAdapter(private val clickListener: OnHomeClickListener) :
+    ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) {
 
     class HomeViewHolder(private val binding: ItemHomeListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Home) {
+        fun bind(item: Home, clickListener: OnHomeClickListener) {
 
             if (item.idText == NOTE) {
                 binding.homeItemTextView.text =
@@ -25,7 +26,7 @@ class HomeAdapter : ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) 
                 val notes = item.notes
 
                 val noteAdapter = NoteAdapter(horizontal = true, OnNoteClickListener { note, _, _ ->
-
+                    clickListener.onClick(Home(NOTE, notes = listOf(note)))
                 })
 
                 binding.homeListList.apply {
@@ -47,9 +48,10 @@ class HomeAdapter : ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) 
 
                 val sheets = item.sheets
 
-                val sheetAdapter = SheetAdapter(horizontal = true, OnSheetClickListener { sheet, _ ->
-
-                })
+                val sheetAdapter =
+                    SheetAdapter(horizontal = true, OnSheetClickListener { sheet, _ ->
+                        clickListener.onClick(Home(SHEET, sheets = listOf(sheet)))
+                    })
 
                 binding.homeListList.apply {
                     adapter = sheetAdapter
@@ -73,7 +75,7 @@ class HomeAdapter : ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) 
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), clickListener)
     }
 }
 
@@ -85,4 +87,8 @@ object HomeDiffUtil : DiffUtil.ItemCallback<Home>() {
     override fun areContentsTheSame(oldItem: Home, newItem: Home): Boolean {
         return oldItem == newItem
     }
+}
+
+class OnHomeClickListener(val clickListener: (home: Home) -> Unit) {
+    fun onClick(home: Home) = clickListener(home)
 }

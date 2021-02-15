@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hurdle.bluenote.adapters.HomeAdapter
+import com.hurdle.bluenote.adapters.OnHomeClickListener
 import com.hurdle.bluenote.data.Home
 import com.hurdle.bluenote.databinding.FragmentHomeBinding
 import com.hurdle.bluenote.utils.NOTE
@@ -38,10 +40,37 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        homes.clear()
+
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         sheetViewModel = ViewModelProvider(this).get(SheetViewModel::class.java)
 
-        homeAdapter = HomeAdapter()
+        homeAdapter = HomeAdapter(OnHomeClickListener {
+
+            if (it.idText == NOTE) {
+                if (it.notes != null) {
+                    val note = it.notes[0]
+                    val action =
+                        HomeFragmentDirections.actionNavHomeToNavNotePage(note.id, note.title)
+                    this.findNavController().navigate(action)
+
+                    homes.clear()
+                }
+            } else if (it.idText == SHEET) {
+                if (it.sheets != null) {
+                    val sheet = it.sheets[0]
+                    val action = HomeFragmentDirections.actionNavHomeToNavSheetQuestion(
+                        sheet.id,
+                        sheet.start,
+                        sheet.end,
+                        sheet.title
+                    )
+                    this.findNavController().navigate(action)
+
+                    homes.clear()
+                }
+            }
+        })
 
         binding.homeList.apply {
             adapter = homeAdapter
@@ -50,13 +79,17 @@ class HomeFragment : Fragment() {
         }
 
         noteViewModel.notes.observe(viewLifecycleOwner) {
-            homes.add(Home(NOTE, notes = it))
-            homeAdapter.submitList(homes)
+            if (it.isNotEmpty() && homes.size <= 1) {
+                homes.add(Home(NOTE, notes = it))
+                homeAdapter.submitList(homes)
+            }
         }
 
         sheetViewModel.sheets.observe(viewLifecycleOwner) {
-            homes.add(Home(SHEET, sheets = it))
-            homeAdapter.submitList(homes)
+            if (it.isNotEmpty() && homes.size <= 1) {
+                homes.add(Home(SHEET, sheets = it))
+                homeAdapter.submitList(homes)
+            }
         }
     }
 }
