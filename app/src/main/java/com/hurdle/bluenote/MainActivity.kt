@@ -10,6 +10,7 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.edit
 import androidx.core.view.forEach
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,10 +31,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var toolbar: Toolbar
+    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        drawerLayout = findViewById(R.id.drawer_layout)
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -42,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        appBarConfiguration = AppBarConfiguration(setOf())
+        appBarConfiguration = AppBarConfiguration(setOf(), drawerLayout)
 
         bottomNavView = findViewById(R.id.main_bottom_nav)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -62,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
                     toolbar.setNavigationOnClickListener {
                         // drawLayout 이벤트
+                        drawerLayout.open()
                     }
                     // 하단뷰 보임
                     bottomNavView.visibility = View.VISIBLE
