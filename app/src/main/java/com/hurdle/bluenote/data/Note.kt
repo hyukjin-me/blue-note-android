@@ -12,5 +12,5 @@ data class Note(
 
     var title: String = "",
 
-    var time: Long = System.currentTimeMillis(),
+    var time: Long = System.currentTimeMillis()
 )

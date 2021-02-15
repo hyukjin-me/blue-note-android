@@ -1,5 +1,7 @@
 package com.hurdle.bluenote.adapters
 
+import android.app.ActionBar
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,8 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.databinding.ItemNoteListBinding
+import kotlin.math.min
 
-class NoteAdapter(private val clickListener: OnNoteClickListener) :
+class NoteAdapter(
+    private val horizontal: Boolean = false,
+    private val clickListener: OnNoteClickListener
+) :
     ListAdapter<Note, NoteAdapter.NoteViewHolder>(NoteDiffUtil) {
 
     class NoteViewHolder(private val binding: ItemNoteListBinding) :
@@ -36,6 +42,11 @@ class NoteAdapter(private val clickListener: OnNoteClickListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemNoteListBinding.inflate(inflater, parent, false)
+
+        if (horizontal) {
+            binding.noteListCardView.layoutParams.width = 500
+        }
+
         return NoteViewHolder(binding)
     }
 
@@ -49,7 +60,8 @@ class NoteAdapter(private val clickListener: OnNoteClickListener) :
 }
 
 class OnNoteClickListener(val clickListener: (note: Note, isLongClick: Boolean, position: Int) -> Unit) {
-    fun onClick(note: Note, isLongClick: Boolean, position:Int) = clickListener(note, isLongClick, position)
+    fun onClick(note: Note, isLongClick: Boolean, position: Int) =
+        clickListener(note, isLongClick, position)
 }
 
 object NoteDiffUtil : DiffUtil.ItemCallback<Note>() {

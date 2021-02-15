@@ -52,7 +52,7 @@ class NoteFragment : Fragment() {
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
 
-        noteAdapter = NoteAdapter(OnNoteClickListener { note, isLongClick, position ->
+        noteAdapter = NoteAdapter(clickListener = OnNoteClickListener { note, isLongClick, position ->
             if (!isDeleteButton) {
                 if (isLongClick) {
                     // 편집화면으로 이동
