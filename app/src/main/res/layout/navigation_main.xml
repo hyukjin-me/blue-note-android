@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/backgroundBlue"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_main">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/navi_main_circle_image_view"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="88dp"
+        android:src="@drawable/ic_baseline_person_24"
+        android:visibility="visible"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/mini"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/navi_main_anomymous_user_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxLines="1"
+        android:minLines="1"
+        android:text="@string/anonymous_user"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/navi_main_circle_image_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/navi_main_circle_image_view"
+        app:layout_constraintTop_toTopOf="@+id/navi_main_circle_image_view" />
+
+    <View
+        android:id="@+id/navi_main_line"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/normal"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navi_main_circle_image_view" />
+
+    <TextView
+        android:id="@+id/navi_main_note_info_text_vew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/half"
+        android:text="@string/fragment_note"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title"
+        app:layout_constraintBottom_toBottomOf="@+id/navi_main_note_icon_image_view"
+        app:layout_constraintStart_toEndOf="@+id/navi_main_note_icon_image_view"
+        app:layout_constraintTop_toTopOf="@+id/navi_main_note_icon_image_view" />
+
+    <ImageView
+        android:id="@+id/navi_main_note_icon_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navi_main_line"
+        app:srcCompat="@drawable/ic_baseline_note_24"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/nav_main_note_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/half"
+        android:layout_marginTop="@dimen/normal"
+        android:text="@string/notes"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/navi_main_note_info_text_vew"
+        app:layout_constraintTop_toBottomOf="@+id/navi_main_note_info_text_vew" />
+
+    <TextView
+        android:id="@+id/nav_main_note_value_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/half"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_main_note_title_text_view"
+        app:layout_constraintStart_toEndOf="@+id/nav_main_note_title_text_view"
+        app:layout_constraintTop_toTopOf="@+id/nav_main_note_title_text_view"
+        tools:text="999" />
+
+    <ImageView
+        android:id="@+id/navi_main_sheet_icon_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/navi_main_note_icon_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/nav_main_note_title_text_view"
+        app:srcCompat="@drawable/ic_baseline_ballot_24"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/navi_main_sheet_info_text_vew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/half"
+        android:text="@string/fragment_sheet"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title"
+        app:layout_constraintBottom_toBottomOf="@+id/navi_main_sheet_icon_image_view"
+        app:layout_constraintStart_toEndOf="@+id/navi_main_sheet_icon_image_view"
+        app:layout_constraintTop_toTopOf="@+id/navi_main_sheet_icon_image_view" />
+
+    <TextView
+        android:id="@+id/nav_main_sheet_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/half"
+        android:layout_marginTop="@dimen/normal"
+        android:text="@string/questions"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/navi_main_sheet_info_text_vew"
+        app:layout_constraintTop_toBottomOf="@+id/navi_main_sheet_info_text_vew" />
+
+    <TextView
+        android:id="@+id/nav_main_sheet_value_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/half"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_main_sheet_title_text_view"
+        app:layout_constraintStart_toEndOf="@+id/nav_main_sheet_title_text_view"
+        app:layout_constraintTop_toTopOf="@+id/nav_main_sheet_title_text_view"
+        tools:text="605" />
+
+    <Button
+        android:id="@+id/nav_main_finish_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/normal"
+        android:layout_marginBottom="@dimen/normal"
+        android:text="@string/finish_app"
+        android:background="@color/blue_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

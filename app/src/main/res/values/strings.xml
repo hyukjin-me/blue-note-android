@@ -84,4 +84,8 @@
     <string name="preference_file_key">helper_state</string>
     <string name="recent_sheet">Recent Sheets</string>
     <string name="recent_note">Recent Notes</string>
+    <string name="anonymous_user">Anonymous User</string>
+    <string name="notes">"Words : "</string>
+    <string name="questions">"Sheets : "</string>
+    <string name="finish_app">App Finish</string>
 </resources>
