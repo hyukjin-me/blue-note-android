@@ -90,4 +90,10 @@
     <string name="finish_app">App Finish</string>
     <string name="msg_finish_app">Finish App?</string>
     <string name="finish">Finish</string>
+    <string name="bluenote_version">BlueNote Version</string>
+    <string name="opensource_license">OpenSource License</string>
+    <string name="kakaotalk_openchat">Kakaotalk OpenChat</string>
+    <string name="email">EMAIL</string>
+    <string name="about_bluenote">About BlueNote</string>
+    <string name="terms_of_service">Terms of service</string>
 </resources>
