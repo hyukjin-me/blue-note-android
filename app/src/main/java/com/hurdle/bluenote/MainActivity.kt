@@ -70,6 +70,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     // 하단뷰 보임
                     bottomNavView.visibility = View.VISIBLE
+
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
                 R.id.nav_note -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_note_24)
@@ -78,6 +80,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     // 하단뷰 보임
                     bottomNavView.visibility = View.VISIBLE
+
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
                 R.id.nav_note_create -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
@@ -87,6 +91,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     // 하단뷰 보임
                     bottomNavView.visibility = View.VISIBLE
+
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
                 R.id.nav_note_page -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
@@ -96,6 +102,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     // 하단뷰 숨김
                     bottomNavView.visibility = View.GONE
+
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
                 R.id.nav_sheet -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_ballot_24)
@@ -103,6 +111,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     // 하단뷰 보임
                     bottomNavView.visibility = View.VISIBLE
+
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
                 R.id.nav_sheet_create -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
@@ -112,6 +122,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     // 하단뷰 보임
                     bottomNavView.visibility = View.VISIBLE
+
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
                 R.id.nav_sheet_question -> {
                     toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
@@ -121,6 +133,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     // 하단뷰 숨김
                     bottomNavView.visibility = View.GONE
+
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
             }
         }
