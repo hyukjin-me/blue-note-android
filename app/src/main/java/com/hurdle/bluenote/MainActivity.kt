@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.edit
 import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,6 +25,8 @@ import com.hurdle.bluenote.utils.HelperConstants
 import com.hurdle.bluenote.utils.HelperConstants.EXPANSION_VIEW
 import com.hurdle.bluenote.utils.HelperConstants.ICON_VIEW
 import com.hurdle.bluenote.utils.HelperConstants.INIT_NONE
+import com.hurdle.bluenote.viewmodels.NoteViewModel
+import com.hurdle.bluenote.viewmodels.SheetViewModel
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +36,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var toolbar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
+
+    private lateinit var noteValueTextView: TextView
+    private lateinit var noteViewModel: NoteViewModel
+
+    private lateinit var sheetValueTextView: TextView
+    private lateinit var sheetViewModel: SheetViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +68,18 @@ class MainActivity : AppCompatActivity() {
                 action = null
             }
             startService(intent)
+        }
+
+        noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
+        noteValueTextView = findViewById<TextView>(R.id.nav_main_note_value_text_view)
+        noteViewModel.notes.observe(this) {
+            noteValueTextView.text = it.size.toString()
+        }
+
+        sheetViewModel = ViewModelProvider(this).get(SheetViewModel::class.java)
+        sheetValueTextView = findViewById<TextView>(R.id.nav_main_sheet_value_text_view)
+        sheetViewModel.sheets.observe(this) {
+            sheetValueTextView.text = it.size.toString()
         }
 
         navController.addOnDestinationChangedListener { controller, destination, _ ->
