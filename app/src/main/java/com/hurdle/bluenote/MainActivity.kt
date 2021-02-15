@@ -1,16 +1,12 @@
 package com.hurdle.bluenote
 
-import android.app.PendingIntent
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.edit
-import androidx.core.view.forEach
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -21,13 +17,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hurdle.bluenote.service.SheetHelperService
-import com.hurdle.bluenote.utils.HelperConstants
-import com.hurdle.bluenote.utils.HelperConstants.EXPANSION_VIEW
-import com.hurdle.bluenote.utils.HelperConstants.ICON_VIEW
 import com.hurdle.bluenote.utils.HelperConstants.INIT_NONE
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 import com.hurdle.bluenote.viewmodels.SheetViewModel
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
