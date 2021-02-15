@@ -17,6 +17,7 @@ class SheetViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: SheetRepository
 
     val sheets: LiveData<List<Sheet>>
+    val recentSheets: LiveData<List<Sheet>>
 
     private val _searchSheet = MutableLiveData<List<Sheet>?>()
     val searchSheet = _searchSheet
@@ -34,6 +35,7 @@ class SheetViewModel(application: Application) : AndroidViewModel(application) {
         val sheetDao = NoteDatabase.getDatabase(application).sheetDao
         repository = SheetRepository(sheetDao)
         sheets = repository.sheets
+        recentSheets = repository.recentSheets
     }
 
     fun insert(sheet: Sheet) = viewModelScope.launch(Dispatchers.IO) {

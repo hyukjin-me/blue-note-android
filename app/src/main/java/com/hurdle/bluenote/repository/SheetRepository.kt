@@ -9,6 +9,7 @@ import com.hurdle.bluenote.data.SheetDao
 class SheetRepository(private val sheetDao: SheetDao) {
 
     val sheets: LiveData<List<Sheet>> = sheetDao.getAll()
+    val recentSheets: LiveData<List<Sheet>> = sheetDao.getRecentSheet()
 
     @WorkerThread
     fun insert(sheet: Sheet) {

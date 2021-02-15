@@ -20,6 +20,9 @@ interface NoteDao {
     @Query("SELECT * FROM note_table ORDER BY id DESC")
     fun getAll(): LiveData<List<Note>>
 
+    @Query("SELECT * FROM note_table ORDER BY id DESC LIMIT 6")
+    fun getRecentNotes(): LiveData<List<Note>>
+
     @Query("SELECT * FROM note_table WHERE id = :key LIMIT 1")
     fun get(key: Long): Note
 

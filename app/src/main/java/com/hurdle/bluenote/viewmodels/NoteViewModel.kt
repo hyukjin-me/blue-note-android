@@ -13,6 +13,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: NoteRepository
 
     val notes: LiveData<List<Note>>
+    val recentNotes: LiveData<List<Note>>
 
     private val _note = MutableLiveData<Note?>()
     val note = _note
@@ -30,6 +31,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         val noteDao = NoteDatabase.getDatabase(application).noteDao
         repository = NoteRepository(noteDao)
         notes = repository.getNotes
+        recentNotes = repository.getRecentNotes
     }
 
     fun insert(note: Note) = viewModelScope.launch(Dispatchers.IO) {

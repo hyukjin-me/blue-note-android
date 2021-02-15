@@ -6,6 +6,8 @@ import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.data.NoteDao
 
 class NoteRepository(private val noteDao: NoteDao) {
+    val getRecentNotes: LiveData<List<Note>> = noteDao.getRecentNotes()
+
     val getNotes: LiveData<List<Note>> = noteDao.getAll()
 
     @WorkerThread

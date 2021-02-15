@@ -78,14 +78,14 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
         }
 
-        noteViewModel.notes.observe(viewLifecycleOwner) {
+        noteViewModel.recentNotes.observe(viewLifecycleOwner) {
             if (it.isNotEmpty() && homes.size <= 1) {
                 homes.add(Home(NOTE, notes = it))
                 homeAdapter.submitList(homes)
             }
         }
 
-        sheetViewModel.sheets.observe(viewLifecycleOwner) {
+        sheetViewModel.recentSheets.observe(viewLifecycleOwner) {
             if (it.isNotEmpty() && homes.size <= 1) {
                 homes.add(Home(SHEET, sheets = it))
                 homeAdapter.submitList(homes)

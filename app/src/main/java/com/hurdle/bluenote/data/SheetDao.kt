@@ -20,6 +20,9 @@ interface SheetDao {
     @Query("SELECT * FROM sheet ORDER BY id DESC")
     fun getAll(): LiveData<List<Sheet>>
 
+    @Query("SELECT * FROM sheet ORDER BY id DESC LIMIT 6")
+    fun getRecentSheet(): LiveData<List<Sheet>>
+
     @Query("SELECT * FROM sheet WHERE id = :key")
     fun get(key: Long): Sheet
 
