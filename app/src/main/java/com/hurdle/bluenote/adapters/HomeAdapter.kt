@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.data.Home
 import com.hurdle.bluenote.databinding.ItemHomeListBinding
+import com.hurdle.bluenote.utils.NOTE
+import com.hurdle.bluenote.utils.SHEET
 
 class HomeAdapter : ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) {
 
@@ -16,7 +18,7 @@ class HomeAdapter : ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) 
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Home) {
 
-            if (item.idText == "note") {
+            if (item.idText == NOTE) {
                 binding.homeItemTextView.text =
                     binding.root.resources.getString(R.string.recent_note)
 
@@ -39,7 +41,7 @@ class HomeAdapter : ListAdapter<Home, HomeAdapter.HomeViewHolder>(HomeDiffUtil) 
                 noteAdapter.submitList(notes)
             }
 
-            if (item.idText == "sheet") {
+            if (item.idText == SHEET) {
                 binding.homeItemTextView.text =
                     binding.root.resources.getString(R.string.recent_sheet)
 

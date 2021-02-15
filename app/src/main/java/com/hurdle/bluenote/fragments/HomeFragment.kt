@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hurdle.bluenote.adapters.HomeAdapter
 import com.hurdle.bluenote.data.Home
 import com.hurdle.bluenote.databinding.FragmentHomeBinding
+import com.hurdle.bluenote.utils.NOTE
+import com.hurdle.bluenote.utils.SHEET
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 import com.hurdle.bluenote.viewmodels.SheetViewModel
 
@@ -48,12 +50,12 @@ class HomeFragment : Fragment() {
         }
 
         noteViewModel.notes.observe(viewLifecycleOwner) {
-            homes.add(Home("note", notes = it))
+            homes.add(Home(NOTE, notes = it))
             homeAdapter.submitList(homes)
         }
 
         sheetViewModel.sheets.observe(viewLifecycleOwner) {
-            homes.add(Home("sheet", sheets = it))
+            homes.add(Home(SHEET, sheets = it))
             homeAdapter.submitList(homes)
         }
     }
