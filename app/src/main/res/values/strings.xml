@@ -96,4 +96,7 @@
     <string name="email">EMAIL</string>
     <string name="about_bluenote">About BlueNote</string>
     <string name="terms_of_service">Terms of service</string>
+    <string name="kakaotalk_link_agree">Would you like to go to the KakaoTalk BlueNote open chat?</string>
+    <string name="request_email">Would you like to send an email?</string>
+    <string name="email_address">1113437k@gmail.com</string>
 </resources>

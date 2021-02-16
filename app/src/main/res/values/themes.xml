@@ -107,4 +107,8 @@
         <item name="backgroundTint">@color/blue_btn</item>
         <item name="android:tag">none</item>
     </style>
+
+    <style name="moreBtnStyle">
+        <item name="android:minHeight">100dp</item>
+    </style>
 </resources>
