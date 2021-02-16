@@ -74,6 +74,9 @@ class MoreFragment : Fragment() {
                     
                     CircleImageView 3.0.0 
                     (Apache-2.0)
+                    
+                    Firebase-android-sdk
+                    (Apache-2.0)
                 """.trimIndent()
         }
 
