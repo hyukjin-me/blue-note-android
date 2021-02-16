@@ -134,7 +134,7 @@ class MoreFragment : Fragment() {
         binding.moreTermofserviceButton.setOnClickListener {
             popupWindow.showAtLocation(it, Gravity.CENTER, 0, 0)
             titleTextView.text = getString(R.string.terms_of_service)
-            contentTextView.text = ""
+            contentTextView.text = getString(R.string.privacy_information)
         }
     }
 }
