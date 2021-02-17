@@ -2,6 +2,7 @@ package com.hurdle.bluenote.fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,11 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.snackbar.Snackbar
+import com.hurdle.bluenote.MainActivity.Companion.mInterstitialAd
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.adapters.SheetChartAdapter
 import com.hurdle.bluenote.data.Question
@@ -91,6 +96,8 @@ class SheetChartFragment : Fragment() {
                         sheet.title,
                         sheet.totalTime
                     )
+
+                showAd()
             }
         }
 
@@ -98,6 +105,29 @@ class SheetChartFragment : Fragment() {
             prepareChart(questions)
 
             chartAdapter.submitList(questions)
+        }
+
+        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                Log.d("광고", "Ad was dismissed.")
+            }
+
+            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                Log.d("광고", "Ad failed to show.")
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                Log.d("광고", "Ad showed fullscreen content.")
+                mInterstitialAd = null
+            }
+        }
+    }
+
+    private fun showAd() {
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(requireActivity())
+        } else {
+            Log.d("광고", "The interstitial ad wasn't ready yet.");
         }
     }
 
@@ -203,5 +233,9 @@ class SheetChartFragment : Fragment() {
         override fun getAxisLabel(value: Float, axis: AxisBase?): String {
             return value.toInt().toString()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 }
