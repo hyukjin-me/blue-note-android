@@ -2,7 +2,6 @@ package com.hurdle.bluenote.repository
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.data.Sheet
 import com.hurdle.bluenote.data.SheetDao
 

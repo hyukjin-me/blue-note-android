@@ -18,7 +18,6 @@ import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.databinding.FragmentNoteCreateBinding
-import com.hurdle.bluenote.viewmodels.NoteCreateViewModel
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 
 class NoteCreateFragment : Fragment() {
@@ -26,7 +25,6 @@ class NoteCreateFragment : Fragment() {
     private lateinit var binding: FragmentNoteCreateBinding
 
     private lateinit var noteViewModel: NoteViewModel
-    private lateinit var noteCreateViewModel: NoteCreateViewModel
 
     private lateinit var inputText: EditText
     private lateinit var countText: TextView
@@ -57,7 +55,6 @@ class NoteCreateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        noteCreateViewModel = ViewModelProvider(this).get(NoteCreateViewModel::class.java)
 
         val saveButton = binding.noteCreateSaveButton
         inputText = binding.noteCreateTitleEditText

@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hurdle.bluenote.data.Note
 import com.hurdle.bluenote.data.NoteDatabase
 import com.hurdle.bluenote.data.Sheet
 import com.hurdle.bluenote.repository.SheetRepository

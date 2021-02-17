@@ -1,8 +1,6 @@
 package com.hurdle.bluenote.adapters
 
 import android.util.DisplayMetrics
-import android.util.Log
-import android.view.Display
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +11,6 @@ import com.hurdle.bluenote.data.Sheet
 import com.hurdle.bluenote.databinding.ItemSheetListBinding
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class SheetAdapter(
     private val horizontal: Boolean = false,
