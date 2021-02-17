@@ -8,12 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hurdle.bluenote.adapters.HomeAdapter
-import com.hurdle.bluenote.adapters.OnHomeClickListener
+import com.hurdle.bluenote.adapters.*
 import com.hurdle.bluenote.data.Home
 import com.hurdle.bluenote.databinding.FragmentHomeBinding
-import com.hurdle.bluenote.utils.NOTE
-import com.hurdle.bluenote.utils.SHEET
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 import com.hurdle.bluenote.viewmodels.SheetViewModel
 
@@ -21,12 +18,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private lateinit var homeAdapter: HomeAdapter
+    private lateinit var noteAdapter: NoteAdapter
+    private lateinit var sheetAdapter: SheetAdapter
 
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var sheetViewModel: SheetViewModel
-
-    private val homes = mutableListOf<Home>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,55 +36,51 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homes.clear()
-
         noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
         sheetViewModel = ViewModelProvider(this).get(SheetViewModel::class.java)
 
-        homeAdapter = HomeAdapter(OnHomeClickListener {
-
-            if (it.idText == NOTE) {
-                if (it.notes != null) {
-                    val note = it.notes[0]
-                    val action =
-                        HomeFragmentDirections.actionNavHomeToNavNotePage(note.id, note.title)
-                    this.findNavController().navigate(action)
-
-                    homes.clear()
-                }
-            } else if (it.idText == SHEET) {
-                if (it.sheets != null) {
-                    val sheet = it.sheets[0]
-                    val action = HomeFragmentDirections.actionNavHomeToNavSheetQuestion(
-                        sheet.id,
-                        sheet.start,
-                        sheet.end,
-                        sheet.title
-                    )
-                    this.findNavController().navigate(action)
-
-                    homes.clear()
-                }
-            }
+        sheetAdapter = SheetAdapter(true, OnSheetClickListener { sheet, _ ->
+            val action = HomeFragmentDirections.actionNavHomeToNavSheetQuestion(
+                sheet.id,
+                sheet.start,
+                sheet.end,
+                sheet.title
+            )
+            this.findNavController().navigate(action)
         })
 
-        binding.homeList.apply {
-            adapter = homeAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+        noteAdapter = NoteAdapter(true, OnNoteClickListener { note, _, _ ->
+            val action =
+                HomeFragmentDirections.actionNavHomeToNavNotePage(note.id, note.title)
+            this.findNavController().navigate(action)
+        })
+
+
+        binding.homeNoteList.apply {
+            adapter = noteAdapter
+            layoutManager = LinearLayoutManager(
+                requireContext(), LinearLayoutManager.HORIZONTAL, false
+            )
+            setHasFixedSize(true)
+        }
+
+        binding.homeSheetList.apply {
+            adapter = sheetAdapter
+            layoutManager = LinearLayoutManager(
+                requireContext(), LinearLayoutManager.HORIZONTAL, false
+            )
             setHasFixedSize(true)
         }
 
         noteViewModel.recentNotes.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty() && homes.size <= 1) {
-                homes.add(Home(NOTE, notes = it))
-                homeAdapter.submitList(homes)
+            if (it.isNotEmpty()) {
+                noteAdapter.submitList(it)
             }
         }
 
         sheetViewModel.recentSheets.observe(viewLifecycleOwner) {
-            if (it.isNotEmpty() && homes.size <= 1) {
-                homes.add(Home(SHEET, sheets = it))
-                homeAdapter.submitList(homes)
+            if (it.isNotEmpty()) {
+                sheetAdapter.submitList(it)
             }
         }
     }

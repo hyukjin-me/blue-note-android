@@ -6,14 +6,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/home_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_home_list"
-        tools:itemCount="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/home_note_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/normal"
+        android:text="@string/recent_note"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_note_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:minHeight="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_note_text_view"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_note_list" />
+
+    <TextView
+        android:id="@+id/home_sheet_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal"
+        android:layout_marginTop="@dimen/normal"
+        android:text="@string/recent_sheet"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_note_list" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_sheet_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_sheet_text_view"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_sheet_list" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
