@@ -16,9 +16,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.google.android.gms.ads.*
 import com.google.android.material.snackbar.Snackbar
-import com.hurdle.bluenote.MainActivity.Companion.mInterstitialAd
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.adapters.SheetChartAdapter
 import com.hurdle.bluenote.data.Question
@@ -93,9 +91,6 @@ class SheetChartFragment : Fragment() {
                         sheet.title,
                         sheet.totalTime
                     )
-
-                // 전면광고 호출
-                showAd()
             }
         }
 
@@ -103,29 +98,6 @@ class SheetChartFragment : Fragment() {
             prepareChart(questions)
 
             chartAdapter.submitList(questions)
-        }
-
-        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                // Log.d("광고", "Ad was dismissed.")
-            }
-
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                // Log.d("광고", "Ad failed to show.")
-            }
-
-            override fun onAdShowedFullScreenContent() {
-                // Log.d("광고", "Ad showed fullscreen content.")
-                mInterstitialAd = null
-            }
-        }
-    }
-
-    private fun showAd() {
-        if (mInterstitialAd != null) {
-            mInterstitialAd?.show(requireActivity())
-        } else {
-            // Log.d("광고", "The interstitial ad wasn't ready yet.");
         }
     }
 
@@ -222,6 +194,9 @@ class SheetChartFragment : Fragment() {
             description.isEnabled = false
 
             invalidate()
+
+
+
             visibility = View.VISIBLE
             binding.sheetChartProgressBar.visibility = View.INVISIBLE
         }

@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.provider.Settings
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.Chronometer
@@ -18,6 +19,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.FullScreenContentCallback
 import com.hurdle.bluenote.MainActivity
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.adapters.OnQuestionClickListener
@@ -170,6 +173,25 @@ class SheetQuestionFragment : Fragment() {
                 questionViewModel.doneNavigateToChart()
             }
         }
+
+        MainActivity.mInterstitialAd?.fullScreenContentCallback =
+            object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    Log.d("광고", "Ad was dismissed.")
+                }
+
+                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                    Log.d("광고", "Ad failed to show.")
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    Log.d("광고", "Ad showed fullscreen content.")
+                    MainActivity.mInterstitialAd = null
+
+                    // 광고가 성공적으로 출력되었을때 차트로 이동됨
+                    navigateChart()
+                }
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -195,7 +217,8 @@ class SheetQuestionFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_chart -> {
-                navigateChart()
+                // 자연스러운 전환을 위해 차트 페이지 이전에 광고 호출
+                showAd()
                 return true
             }
             R.id.menu_helper -> {
@@ -270,6 +293,7 @@ class SheetQuestionFragment : Fragment() {
 
     private fun navigateChart() {
         if (sheetId != -1L) {
+            // 차트화면으로 이동
             questionViewModel.navigateToChart(sheetId)
         }
     }
@@ -326,6 +350,17 @@ class SheetQuestionFragment : Fragment() {
         requireActivity().apply {
             startService(intent)
             this.finish()
+        }
+    }
+
+    private fun showAd() {
+        if (MainActivity.mInterstitialAd != null) {
+            MainActivity.mInterstitialAd?.show(requireActivity())
+        } else {
+            Log.d("광고", "The interstitial ad wasn't ready yet.");
+
+            // 광고가 준비가 안되었거나 앱실행후 이미 한번 광고를 시청했을경우 바로 차트화면으로 넘어감
+            navigateChart()
         }
     }
 }
