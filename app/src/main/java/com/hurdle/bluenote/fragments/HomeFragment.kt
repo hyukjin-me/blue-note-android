@@ -47,20 +47,36 @@ class HomeFragment : Fragment() {
         sheetViewModel = ViewModelProvider(this).get(SheetViewModel::class.java)
 
         sheetAdapter = SheetAdapter(true, OnSheetClickListener { sheet, _ ->
-            val action = HomeFragmentDirections.actionNavHomeToNavSheetQuestion(
-                sheet.id,
-                sheet.start,
-                sheet.end,
-                sheet.title
-            )
-            this.findNavController().navigate(action)
+            sheetViewModel.navigateToQuestion(sheet)
         })
 
+        sheetViewModel.navigateToQuestion.observe(viewLifecycleOwner) {
+            if (it != null) {
+                val action = HomeFragmentDirections.actionNavHomeToNavSheetQuestion(
+                    it.id,
+                    it.start,
+                    it.end,
+                    it.title
+                )
+                this.findNavController().navigate(action)
+
+                sheetViewModel.doneNavigateQuestion()
+            }
+        }
+
         noteAdapter = NoteAdapter(true, OnNoteClickListener { note, _, _ ->
-            val action =
-                HomeFragmentDirections.actionNavHomeToNavNotePage(note.id, note.title)
-            this.findNavController().navigate(action)
+            noteViewModel.navigateToPage(note)
         })
+
+        noteViewModel.navigateToPage.observe(viewLifecycleOwner){note->
+            if (note!=null){
+                val action =
+                    HomeFragmentDirections.actionNavHomeToNavNotePage(note.id, note.title)
+                this.findNavController().navigate(action)
+
+                noteViewModel.doneNavigatePage()
+            }
+        }
 
 
         binding.homeNoteList.apply {
