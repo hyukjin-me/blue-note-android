@@ -95,22 +95,29 @@
     <string name="kakaotalk_openchat">카카오톡 오픈채팅</string>
     <string name="email">이메일</string>
     <string name="about_bluenote">About BlueNote</string>
-    <string name="terms_of_service">서비스 이용약관 및 개인정보 처리방침</string>
+    <string name="terms_of_service">서비스 이용약관</string>
     <string name="kakaotalk_link_agree">링크를 열어 카카오톡 오픈채팅방으로 이동하시겠습니까?</string>
     <string name="request_email">이메일을 보내시겠습니까?</string>
     <string name="email_address">1113437k@gmail.com</string>
     <string name="privacy_information">
-          블루노트 개인정보 처리방침\n\n블루노트은 정보통신망 이용촉진 및 정보보호 등에 관한 법률, 개인정보보호법, 통신비밀보호법, 전기통신사업법 등 정보통신서비스제공자가 준수하여야 하는 대한민국의 관계법령 및 개인정보보호 규정, 가이드라인을 준수하며, 관련법령에 의거한 개인정보처리방침을 정하여 이용자의 권익 보호에 최선을 다하고 있습니다. 본 개인정보처리방침은 블루노트가 제공하는 서비스(이하 \'서비스\'라 함)에 적용됩니다.\n
+블루노트 개인정보 처리방침\n\n
+블루노트 개발자는 블루노트 앱 이용자의 소중한 개인정보를 보호하기 위해 개인정보보호 관련 법령을 준수합니다. 본 개인정보처리방침은 블루노트 앱에 적용됩니다.\n
 \n
-1. 개인정보 수집항목\n
-개인을 식별할 수 있는 정보는 수집하지 않습니다.개인정보처리방침 변경 발생시 알려드리겠습니다.\n
+1. 개인정보 수집항목, 수집방법, 이용목적\n
+개인을 식별할 수 있는 개인 정보는 수집하지 않습니다\n
 \n
-2. 개인정보 자동 수집 장치\n
-Google, Inc. (이하 ‘Google’)이 제공하는 Firebase Analytics(Google Analytics) 툴을 사용하고 있습니다.\n\n
-Google Analytics를 통해 수집되는 정보의 처리는 Google 개인정보보호정책과 Google Analytics 이용약관을 적용 받습니다.\n
+2. 개인정보 자동 수집 장치의 설치∙운영 및 거부에 관한 사항\n
+Google, Inc. (이하 ‘Google’)이 제공하는 Firebase Analytics(Google Analytics) 통계분석 툴, Admob 광고 솔루션 툴을 사용하고 있습니다.\n\n
+Google Analytics, Admob를 통해 수집되는 정보의 처리는 Google 개인정보보호정책과 Google Analytics 이용약관을 적용 받습니다.\n
 – Google 개인정보보호정책 : https://www.google.com/intl/ko/policies/privacy/\n
 – Google Analytics 이용약관 : https://www.google.com/analytics/terms/kr.html\n\n
 Google Analytics는 개인을 식별할 수 있는 정보는 수집하지 않으며, 수집한 정보를 다른 경로를 통해 얻은 개인식별 정보와 결합하지 않습니다.\n
+\n
+블루노트 개발자는 이용자의 ADID를 수집하지 않습니다.\n
+ADID(Android OS)/IDFA(iOS)란 모바일 앱 이용자의 광고 식별 값으로서, 사용자의 맞춤 서비스 제공이나 더 나은 환경의 광고를 제공하기 위한 측정 값입니다.\n
+\n\n
+거부방법\n
+Android: 설정->구글(구글설정)->광고->광고 맞춤설정 선택 해제\n
 \n
 3. 개인정보의 공유 및 제공\n
 개인을 식별할 수 있는 정보가 없으며 제공하지 않습니다.\n
@@ -118,7 +125,7 @@ Google Analytics는 개인을 식별할 수 있는 정보는 수집하지 않으
 \n
 4. 개인정보의 처리위탁\n
 개인을 식별할 수 있는 정보가 없으며 제공하지 않습니다.\n
-Google Analytics 툴을 사용하고 있습니다. 익명의 정보가 구글 서버로 저장됩니다.\n
+Google Analytics, Admob 을 사용하고 있습니다. 익명의 정보가 구글 서버로 저장됩니다. \n
 \n
 5.개인정보의 보유 및 이용기간\n
 별도의 개인정보를 보유하지 않습니다.\n
@@ -131,5 +138,22 @@ Google Analytics 툴을 사용하고 있습니다. 익명의 정보가 구글 �
 \n
 8. 고지의 의무\n
 공고일자 : 2021년 2월 17일\n
+    </string>
+    <string name="privacy_policy">개인정보 처리방침</string>
+    <string name="terms_of_service_information" >
+서비스의 제공 및 변경\n
+사용자는 별도의 회원가입 없이 노트 기능, 정답지 제공 및 블루노트에서 제공하는 서비스를 이용 할 수 있습니다.\n
+블루노트는 변경될 서비스의 내용 및 제공일자를 미리 통지하고 변경하여 제공할 수 있습니다.\n
+\n
+업데이트로 인한 데이터 초기화가 발생 할 수 있습니다.\n
+\n
+서비스의 중단\n
+서비스 운영이 불가능할경우 사전동의 없이 중단 할 수 있습니다.\n
+\n
+개인정보를 수집 하지 않습니다. 변동이 발생할 경우 사용자에게 알리겠습니다.\n
+\n
+광고게재 및 광고주와의 거래\n
+서비스 이용자는 서비스상에 노출되는 광고게재에 대해 동의합니다.\n
+서비스상에 게재되어 있거나 서비스를 통한 광고주의 판촉활동에 회원이 참여하거나 교신 또는 거래를 함으로써 발생하는 손실과 손해에 대해 책임을 지지 않습니다.\n
     </string>
 </resources>
