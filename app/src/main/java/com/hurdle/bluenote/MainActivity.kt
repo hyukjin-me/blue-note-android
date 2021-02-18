@@ -193,6 +193,11 @@ class MainActivity : AppCompatActivity() {
                     }
                     drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
+                R.id.nav_splash -> {
+                    toolbar.navigationIcon = null
+                    toolbar.title = ""
+                    bottomNavView.visibility = View.GONE
+                }
             }
         }
 

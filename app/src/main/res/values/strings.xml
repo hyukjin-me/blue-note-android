@@ -159,8 +159,10 @@ Google Analytics 툴을 사용하고 있습니다. 익명의 정보가 구글 �
 서비스 이용자는 서비스상에 노출되는 광고게재에 대해 동의합니다.\n
 서비스상에 게재되어 있거나 서비스를 통한 광고주의 판촉활동에 회원이 참여하거나 교신 또는 거래를 함으로써 발생하는 손실과 손해에 대해 책임을 지지 않습니다.\n
     </string>
-    <string name="preference_key" translatable="false">ServicepreferenceKey</string>
-    <string name="service_agree" translatable="false">serviceAgree</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="agree">Agree</string>
+    <string name="preference_key" translatable="false">ServicepreferenceKey</string>
+    <string name="service_agree" translatable="false">serviceAgree</string>
+    <string name="blue_note" translatable="false">Blue Note</string>
+    <string name="fragment_splash" translatable="false">Splash</string>
 </resources>
