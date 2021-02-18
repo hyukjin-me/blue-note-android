@@ -10,7 +10,7 @@ import androidx.core.graphics.BlendModeCompat
 import com.hurdle.bluenote.R
 
 // https://developer.android.com/reference/android/graphics/PorterDuff.Mode
-// SRC_ATOP, 대상 픽셀을 포함하지 않는 소스 픽셀을 버립니다.
+// SRC_ATOP, 기존색 덮어사용
 fun colorBlendFilter(color: Int): ColorFilter? {
     return BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
         color, BlendModeCompat.SRC_ATOP

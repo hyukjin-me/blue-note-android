@@ -1,0 +1,135 @@
+<resources>
+    <string name="app_name">블루노트</string>
+
+    <!-- fragment labels-->
+    <string name="fragment_home">홈</string>
+    <string name="fragment_note">노트</string>
+    <string name="fragment_note_create">노트 생성</string>
+    <string name="fragment_note_page">Note Page</string>
+    <string name="fragment_note_open">Note Open</string>
+    <string name="fragment_sheet">정답지</string>
+    <string name="fragment_sheet_create">정답지 생성</string>
+    <string name="fragment_sheet_question">Question</string>
+    <string name="fragment_sheet_chart">차트</string>
+    <string name="fragment_more">더보기</string>
+
+    <string name="notification_name" translatable="false">mini_service_notification</string>
+
+    <!-- 노트생성 화면의 유저가 입력한 텍스트의 갯수-->
+    <string name="display_count">%s/100</string>
+
+    <!-- 노트 화면 리스트의 타이틀-->
+    <string name="display_title">%s</string>
+
+    <!-- 노트 페이지 화면의 날씨 정보 -->
+    <string name="display_weather" translatable="false">Today %s°C, %s in %s</string>
+
+    <!-- 시트 화면의 Question 갯수 ex) 1-20 -->
+    <string name="display_question_range">%d-%d</string>
+
+    <!-- Question 화면에서 문제마다 current 시간 표시 -->
+    <string name="display_time">Progress : %s</string>
+
+    <!-- 차트화면에서 보여줄 타이틀-->
+    <string name="display_chart_title">차트 : %s, time : %s</string>
+    <string name="display_chart_info">%d 문제, +%d, -%d</string>
+
+    <string name="desc_add">add</string>
+
+    <string name="title">제목</string>
+    <string name="save">저장</string>
+    <string name="cancel">취소</string>
+    <string name="edit">Edit</string>
+    <string name="edit_mode">Edit Mode</string>
+    <string name="delete">삭제</string>
+    <string name="msg_edit_note">변경할 노트를 길게 클릭하세요</string>
+    <string name="msg_delete_note">삭제하시겠습니까?</string>
+    <string name="msg_delete_note_guide">삭제할 노트를 선택해주세요</string>
+    <string name="msg_save_note">저장하시겠습니까?</string>
+    <string name="open">열기</string>
+    <string name="message">메세지</string>
+    <string name="close">닫기</string>
+    <string name="search">검색</string>
+    <string name="search_max_count">1 ~ 12 Length</string>
+    <string name="start">시작</string>
+    <string name="stop">중지</string>
+    <string name="end">끝</string>
+    <string name="information">정보</string>
+    <string name="hint_start">ex) 1 ~ </string>
+    <string name="hint_end"> ~ 200</string>
+    <string name="sheet_creation_range">1 ~ 200 Range</string>
+    <string name="sheet_creation_edit">제목만 변경이 가능합니다</string>
+    <string name="no_title">No Ttitle</string>
+    <string name="a" translatable="false">A</string>
+    <string name="b" translatable="false">B</string>
+    <string name="c" translatable="false">C</string>
+    <string name="d" translatable="false">D</string>
+    <string name="e" translatable="false">E</string>
+    <string name="total">Total</string>
+    <string name="current">Current</string>
+    <string name="helper">Helper</string>
+    <string name="chart">차트</string>
+    <string name="error">에러</string>
+    <string name="correct">( O )</string>
+    <string name="wrong">( X )</string>
+    <string name="max_range">에러, 1~200 범위 제한</string>
+    <string name="permission_guide_system_overlay">권한 동의 안내\n\n헬서 서비스를 사용하기위해서 다른앱 위에 그리기 권한동의가 필요합니다.</string>
+    <string name="ok">확인</string>
+    <string name="icon">icon</string>
+    <string name="more">more</string>
+    <string name="next"><![CDATA[>]]></string>
+    <string name="previous"><![CDATA[<]]></string>
+    <string name="play">play</string>
+    <string name="notification_helper">헬퍼가 작동중입니다</string>
+    <string name="preference_file_key">helper_state</string>
+    <string name="recent_sheet">Recent Sheets</string>
+    <string name="recent_note">Recent Notes</string>
+    <string name="anonymous_user">Anonymous User</string>
+    <string name="notes">"노트 : "</string>
+    <string name="questions">"정답지 : "</string>
+    <string name="finish_app">앱 종료</string>
+    <string name="msg_finish_app">종료하시겠습니까?</string>
+    <string name="finish">종료</string>
+    <string name="bluenote_version">블루노트 버전</string>
+    <string name="opensource_license">오픈소스 라이센스</string>
+    <string name="kakaotalk_openchat">카카오톡 오픈채팅</string>
+    <string name="email">이메일</string>
+    <string name="about_bluenote">About BlueNote</string>
+    <string name="terms_of_service">서비스 이용약관 및 개인정보 처리방침</string>
+    <string name="kakaotalk_link_agree">링크를 열어 카카오톡 오픈채팅방으로 이동하시겠습니까?</string>
+    <string name="request_email">이메일을 보내시겠습니까?</string>
+    <string name="email_address">1113437k@gmail.com</string>
+    <string name="privacy_information">
+          블루노트 개인정보 처리방침\n\n블루노트은 정보통신망 이용촉진 및 정보보호 등에 관한 법률, 개인정보보호법, 통신비밀보호법, 전기통신사업법 등 정보통신서비스제공자가 준수하여야 하는 대한민국의 관계법령 및 개인정보보호 규정, 가이드라인을 준수하며, 관련법령에 의거한 개인정보처리방침을 정하여 이용자의 권익 보호에 최선을 다하고 있습니다. 본 개인정보처리방침은 블루노트가 제공하는 서비스(이하 \'서비스\'라 함)에 적용됩니다.\n
+\n
+1. 개인정보 수집항목\n
+개인을 식별할 수 있는 정보는 수집하지 않습니다.개인정보처리방침 변경 발생시 알려드리겠습니다.\n
+\n
+2. 개인정보 자동 수집 장치\n
+Google, Inc. (이하 ‘Google’)이 제공하는 Firebase Analytics(Google Analytics) 툴을 사용하고 있습니다.\n\n
+Google Analytics를 통해 수집되는 정보의 처리는 Google 개인정보보호정책과 Google Analytics 이용약관을 적용 받습니다.\n
+– Google 개인정보보호정책 : https://www.google.com/intl/ko/policies/privacy/\n
+– Google Analytics 이용약관 : https://www.google.com/analytics/terms/kr.html\n\n
+Google Analytics는 개인을 식별할 수 있는 정보는 수집하지 않으며, 수집한 정보를 다른 경로를 통해 얻은 개인식별 정보와 결합하지 않습니다.\n
+\n
+3. 개인정보의 공유 및 제공\n
+개인을 식별할 수 있는 정보가 없으며 제공하지 않습니다.\n
+기본적으로 이용자의 사전 동의 없이는 범위를 초과하여 이용하거나 원칙적으로 이용자의 개인정보를 외부에 공개하지 않습니다. 다만 이용자가 사전에 동의한 하거나 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우 예외로 합니다.\n
+\n
+4. 개인정보의 처리위탁\n
+개인을 식별할 수 있는 정보가 없으며 제공하지 않습니다.\n
+Google Analytics 툴을 사용하고 있습니다. 익명의 정보가 구글 서버로 저장됩니다.\n
+\n
+5.개인정보의 보유 및 이용기간\n
+별도의 개인정보를 보유하지 않습니다.\n
+\n
+6.개인정보 파기절차 및 방법\n
+별도의 개인정보를 수집하지 않습니다. 사용자가 앱 삭제시 모든 정보가 사라집니다. 별도의 파기 절차가 없습니다.\n
+\n
+7.개인정보보호책임자 및 담당자의 연락처\n
+별도의 개인정보를 수집하지 않지만 문의사항 발생시 1113437k@gmail.com 으로 문의 하실 수 있습니다.\n
+\n
+8. 고지의 의무\n
+공고일자 : 2021년 2월 17일\n
+    </string>
+</resources>

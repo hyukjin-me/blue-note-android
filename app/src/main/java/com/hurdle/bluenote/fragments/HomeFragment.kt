@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hurdle.bluenote.adapters.*
-import com.hurdle.bluenote.data.Home
 import com.hurdle.bluenote.databinding.FragmentHomeBinding
 import com.hurdle.bluenote.viewmodels.NoteViewModel
 import com.hurdle.bluenote.viewmodels.SheetViewModel
