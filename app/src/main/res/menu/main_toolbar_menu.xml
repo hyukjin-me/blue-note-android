@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/menu_search"
         android:icon="@drawable/ic_baseline_search_24"
         android:menuCategory="secondary"
         android:title="@string/search"
+        android:visible="false"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView" />
+        app:showAsAction="ifRoom|collapseActionView"
+        tools:visible="true" />
     <item
         android:id="@+id/menu_edit"
         android:icon="@drawable/ic_baseline_edit_24"
         android:menuCategory="secondary"
         android:title="@string/edit"
-        app:showAsAction="ifRoom" />
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        tools:visible="true" />
     <item
         android:id="@+id/menu_delete"
         android:icon="@drawable/ic_baseline_delete_24"
         android:menuCategory="secondary"
         android:title="@string/delete"
-        app:showAsAction="ifRoom" />
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        tools:visible="true" />
 </menu>
