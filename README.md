@@ -2,6 +2,8 @@
 
 Blue Note is an android app that provides simple notes and answer .
 
+<img src="https://github.com/hyukjin-me/blue-note-android/blob/master/previews/n3.png" width="200">
+
 Tech & Libaries 
 - Min SDK version 21 
 - Jetpack : Navigation, LiveData, Room
