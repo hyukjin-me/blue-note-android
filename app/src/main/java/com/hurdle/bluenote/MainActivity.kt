@@ -66,11 +66,13 @@ class MainActivity : AppCompatActivity() {
                     mInterstitialAd = null
                 }
 
+                // 광고호출은 앱실행후 한번만 처리
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     // Log.d("광고", "Ad was loaded.")
                     mInterstitialAd = interstitialAd
                 }
-            })
+            }
+        )
 
         drawerLayout = findViewById(R.id.drawer_layout)
         finishAppButton = findViewById(R.id.nav_main_finish_button)

@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.provider.Settings
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.Chronometer
@@ -22,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.hurdle.bluenote.MainActivity
+import com.hurdle.bluenote.MainActivity.Companion.mInterstitialAd
 import com.hurdle.bluenote.R
 import com.hurdle.bluenote.adapters.OnQuestionClickListener
 import com.hurdle.bluenote.adapters.SheetQuestionAdapter
@@ -174,19 +174,19 @@ class SheetQuestionFragment : Fragment() {
             }
         }
 
-        MainActivity.mInterstitialAd?.fullScreenContentCallback =
+        mInterstitialAd?.fullScreenContentCallback =
             object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
-                    Log.d("광고", "Ad was dismissed.")
+                    // Log.d("광고", "Ad was dismissed.")
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                    Log.d("광고", "Ad failed to show.")
+                    // Log.d("광고", "Ad failed to show.")
                 }
 
                 override fun onAdShowedFullScreenContent() {
-                    Log.d("광고", "Ad showed fullscreen content.")
-                    MainActivity.mInterstitialAd = null
+                    // Log.d("광고", "Ad showed fullscreen content.")
+                    mInterstitialAd = null
 
                     // 광고가 성공적으로 출력되었을때 차트로 이동됨
                     navigateChart()
@@ -353,11 +353,16 @@ class SheetQuestionFragment : Fragment() {
         }
     }
 
+    // 유저가 버튼을 클릭 -> 화면에 광고표시 -> 종료 -> 다음화면 표시
     private fun showAd() {
-        if (MainActivity.mInterstitialAd != null) {
-            MainActivity.mInterstitialAd?.show(requireActivity())
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(requireActivity())
+
+            // Error, 다음화면으로 넘어간뒤에 광고표시되어 주석처리함
+            // mInterstitialAd = null
+            // navigateChart()
         } else {
-            Log.d("광고", "The interstitial ad wasn't ready yet.");
+            // Log.d("광고", "The interstitial ad wasn't ready yet.");
 
             // 광고가 준비가 안되었거나 앱실행후 이미 한번 광고를 시청했을경우 바로 차트화면으로 넘어감
             navigateChart()
