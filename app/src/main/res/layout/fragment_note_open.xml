@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/note_open_close_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,17 +34,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal"
-            tools:background="@drawable/bg_square"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:background="@drawable/bg_square">
 
             <EditText
                 android:id="@+id/note_open_title_text_view"
                 style="@style/inputEditStyle"
-                android:padding="@dimen/small"
-                android:background="@null"
-                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@null"
+                android:enabled="false"
+                android:padding="@dimen/normal"
                 android:theme="@style/scrollEditTheme"
                 tools:text="TextView" />
         </LinearLayout>
