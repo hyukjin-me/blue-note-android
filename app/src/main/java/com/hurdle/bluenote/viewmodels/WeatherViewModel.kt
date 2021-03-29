@@ -40,17 +40,23 @@ class WeatherViewModel(application: Application) : AndroidViewModel(application)
             val weather: Weather? = weatherResponse.body()
             if (weather != null) {
 
-                val temperature: String = weather.main.temp.toString() // °C
-                val atmosphere: String = weather.weather[0].description
-                val location: String = weather.name
+                // 프로가드 설정후 레트로핏에서 정상처리 받아도 null 데이터가 오는경우
+                // https://stackoverflow.com/questions/62770065/after-building-release-version-retrofit2-gets-200-but-empty-data
+                // Error -> data class @Keep 처리
+                // Weather(id=0, base=null, cod=0, dt=0, timezone=0, visibility=0, name=null, clouds=null, coord=null, main=null, sys=null, weather=null, wind=null)
+                if (weather.main != null && weather.weather != null && weather.name != null) {
+                    val temperature: String = weather.main.temp.toString() // °C
+                    val atmosphere: String = weather.weather[0].description
+                    val location: String = weather.name
 
-                val weatherCache = WeatherCache(
-                    temperature = temperature,
-                    atmosphere = atmosphere,
-                    location = location
-                )
+                    val weatherCache = WeatherCache(
+                        temperature = temperature,
+                        atmosphere = atmosphere,
+                        location = location
+                    )
 
-                repository.insert(weatherCache)
+                    repository.insert(weatherCache)
+                }
             }
         }
     }
