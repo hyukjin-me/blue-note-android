@@ -166,7 +166,7 @@ class NotePageFragment : Fragment() {
             setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
             setIconifiedByDefault(true)
             searchViewEditText =
-                this.findViewById(androidx.appcompat.R.id.search_src_text)
+                this.findViewById(R.id.search_src_text)
             // 글자수 제한
             searchViewEditText.filters = arrayOf(InputFilter.LengthFilter(MAX_SEARCH_LENGTH))
 
