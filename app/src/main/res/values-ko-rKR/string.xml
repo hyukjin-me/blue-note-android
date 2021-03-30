@@ -47,7 +47,7 @@
     <string name="msg_delete_note_guide">삭제할 노트를 선택해주세요</string>
     <string name="msg_save_note">저장하시겠습니까?</string>
     <string name="open">열기</string>
-    <string name="message">메세지</string>
+    <string name="message">메시지</string>
     <string name="close">닫기</string>
     <string name="search">검색</string>
     <string name="search_max_count">1 ~ 12 Length</string>
